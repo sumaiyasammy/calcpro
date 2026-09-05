@@ -1,0 +1,19 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "culcpro.github",
+  "orientation": "portrait",
+  "scope": "/",
+  "short_name": "culcpro.github",
+  "start_url": "//calcpro/",
+  "theme_color": "#ffffff",
+  "lang": "en",
+  "display_override": [
+    "fullscreen",
+    "minimal-ui",
+    "standalone",
+    "window-controls-overlay",
+    "browser"
+  ]
+}
