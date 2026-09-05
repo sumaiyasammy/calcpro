@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+content="#080d14">
+
+<title>CalcPro - Scientific Calculator</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#05080d;
+    color:#fff;
+    font-family:Arial,sans-serif;
+}
+
+.app{
+    width:100%;
+    min-height:100vh;
+    background:#080d14;
+    display:flex;
+    flex-direction:column;
+}
+
+/* HEADER */
+
+.header{
+    height:70px;
+    padding:0 14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:#090e16;
+    border-bottom:1px solid #202b3a;
+
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-icon{
+    width:43px;
+    height:43px;
+
+    border-radius:13px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00c9e8,
+        #5b63ff
+    );
+
+    font-size:20px;
+    font-weight:900;
+}
+
+.logo-text{
+    font-size:21px;
+    font-weight:900;
+}
+
+.logo-text span{
+    color:#00d5ed;
+}
+
+.back{
+    width:44px;
+    height:44px;
+
+    border-radius:13px;
+
+    border:1px solid #293748;
+
+    background:#111923;
+
+    color:#fff;
+
+    font-size:28px;
+
+    position:relative;
+    overflow:hidden;
+}
+
+/* MAIN */
+
+.main{
+    width:100%;
+    max-width:720px;
+
+    margin:auto;
+
+    padding:9px;
+
+    flex:1;
+}
+
+/* TITLE */
+
+.title{
+    padding:5px 3px 9px;
+}
+
+.title h1{
+    font-size:23px;
+}
+
+.title p{
+    color:#718095;
+    font-size:11px;
+    margin-top:4px;
+}
+
+/* CALCULATOR */
+
+.calculator{
+    width:100%;
+
+    padding:10px;
+
+    border-radius:22px;
+
+    background:#0b121b;
+
+    border:1px solid #202d3d;
+}
+
+/* DISPLAY */
+
+.display{
+    width:100%;
+
+    min-height:155px;
+
+    padding:15px;
+
+    border-radius:18px;
+
+    background:#080e16;
+
+    border:1px solid #1d2938;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+
+    overflow:hidden;
+}
+
+.mode-row{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:8px;
+}
+
+.mode{
+    border:1px solid #26384b;
+
+    background:#111d29;
+
+    color:#00d5ed;
+
+    border-radius:9px;
+
+    padding:6px 10px;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.expression{
+    min-height:25px;
+
+    color:#68778b;
+
+    text-align:right;
+
+    font-size:15px;
+
+    overflow-x:auto;
+
+    white-space:nowrap;
+}
+
+.result{
+    min-height:56px;
+
+    color:#fff;
+
+    text-align:right;
+
+    font-size:42px;
+
+    font-weight:700;
+
+    line-height:1.15;
+
+    overflow-x:auto;
+
+    white-space:nowrap;
+}
+
+/* FUNCTION BUTTONS */
+
+.function-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(5,1fr);
+
+    gap:6px;
+
+    margin-top:8px;
+}
+
+.function-grid button{
+    height:47px;
+
+    border-radius:12px;
+
+    border:1px solid #263648;
+
+    background:#101923;
+
+    color:#aab6c5;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.function-grid button:active{
+    transform:scale(.94);
+}
+
+/* NUMBER BUTTONS */
+
+.buttons{
+    display:grid;
+
+    grid-template-columns:
+    repeat(5,1fr);
+
+    gap:7px;
+
+    margin-top:8px;
+}
+
+.btn{
+    height:63px;
+
+    border-radius:15px;
+
+    border:1px solid #273648;
+
+    background:#111923;
+
+    color:#fff;
+
+    font-size:23px;
+
+    font-weight:600;
+
+    position:relative;
+    overflow:hidden;
+
+    transition:
+    transform .1s,
+    background .1s;
+}
+
+.btn:active{
+    transform:scale(.93);
+
+    background:#1c2937;
+}
+
+.operator{
+    color:#00d7ee;
+
+    background:#101d2a;
+
+    border-color:#244454;
+}
+
+.special{
+    color:#a9b7c8;
+
+    background:#0f1822;
+}
+
+.clear{
+    color:#ff7c89;
+}
+
+.equal{
+    color:#fff;
+
+    border:0;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00b9db,
+        #5865ff
+    );
+}
+
+/* HISTORY */
+
+.history{
+    margin-top:10px;
+
+    padding:13px;
+
+    border-radius:18px;
+
+    background:#0d151f;
+
+    border:1px solid #202d3d;
+}
+
+.history-head{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:6px;
+}
+
+.history-head h2{
+    font-size:16px;
+}
+
+.history-head button{
+    border:0;
+
+    background:none;
+
+    color:#00d5ed;
+
+    font-size:11px;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.history-item{
+    padding:8px 2px;
+
+    border-bottom:1px solid #1d2836;
+}
+
+.history-expression{
+    color:#718095;
+
+    font-size:11px;
+
+    text-align:right;
+}
+
+.history-result{
+    color:#fff;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    text-align:right;
+
+    margin-top:2px;
+}
+
+.empty{
+    color:#637084;
+
+    text-align:center;
+
+    padding:13px;
+
+    font-size:11px;
+}
+
+/* RIPPLE */
+
+.ripple{
+    position:absolute;
+
+    border-radius:50%;
+
+    transform:scale(0);
+
+    background:
+    rgba(255,255,255,.23);
+
+    pointer-events:none;
+
+    animation:ripple .55s linear;
+}
+
+@keyframes ripple{
+
+    to{
+        transform:scale(4);
+
+        opacity:0;
+    }
+
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+
+    color:#4f5d70;
+
+    font-size:10px;
+
+    padding:15px;
+}
+
+/* SMALL */
+
+@media(max-width:390px){
+
+    .main{
+        padding:6px;
+    }
+
+    .calculator{
+        padding:7px;
+    }
+
+    .display{
+        min-height:145px;
+    }
+
+    .result{
+        font-size:37px;
+    }
+
+    .btn{
+        height:59px;
+        font-size:21px;
+    }
+
+    .function-grid button{
+        height:43px;
+        font-size:11px;
+    }
+
+}
+
+@media(max-width:340px){
+
+    .btn{
+        height:54px;
+        font-size:19px;
+    }
+
+    .function-grid{
+        gap:4px;
+    }
+
+    .buttons{
+        gap:5px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="logo">
+
+<div class="logo-icon">
+ƒx
+</div>
+
+<div class="logo-text">
+Calc<span>Pro</span>
+</div>
+
+</div>
+
+<button
+class="back"
+onclick="history.back()">
+
+‹
+
+</button>
+
+</header>
+
+
+<main class="main">
+
+
+<div class="title">
+
+<h1>
+🔬 Scientific Calculator
+</h1>
+
+<p>
+Advanced mathematical calculations
+</p>
+
+</div>
+
+
+<section class="calculator">
+
+
+<!-- DISPLAY -->
+
+<div class="display">
+
+<div class="mode-row">
+
+<button
+class="mode"
+id="angleMode"
+onclick="toggleAngle()">
+
+DEG
+
+</button>
+
+<span
+style="
+color:#4e5d70;
+font-size:10px;
+">
+
+SCIENTIFIC
+
+</span>
+
+</div>
+
+
+<div
+id="expression"
+class="expression">
+</div>
+
+
+<div
+id="result"
+class="result">
+0
+</div>
+
+</div>
+
+
+<!-- SCIENTIFIC FUNCTIONS -->
+
+<div class="function-grid">
+
+
+<button onclick="scientific('sin')">
+sin
+</button>
+
+<button onclick="scientific('cos')">
+cos
+</button>
+
+<button onclick="scientific('tan')">
+tan
+</button>
+
+<button onclick="scientific('asin')">
+sin⁻¹
+</button>
+
+<button onclick="scientific('acos')">
+cos⁻¹
+</button>
+
+
+<button onclick="scientific('atan')">
+tan⁻¹
+</button>
+
+<button onclick="scientific('log')">
+log
+</button>
+
+<button onclick="scientific('ln')">
+ln
+</button>
+
+<button onclick="scientific('sqrt')">
+√
+</button>
+
+<button onclick="scientific('square')">
+x²
+</button>
+
+
+<button onclick="scientific('cube')">
+x³
+</button>
+
+<button onclick="scientific('factorial')">
+x!
+</button>
+
+<button onclick="insertConstant('π')">
+π
+</button>
+
+<button onclick="insertConstant('e')">
+e
+</button>
+
+<button onclick="scientific('reciprocal')">
+1/x
+</button>
+
+
+</div>
+
+
+<!-- MAIN BUTTONS -->
+
+<div class="buttons">
+
+
+<button
+class="btn clear"
+onclick="clearAll()">
+
+AC
+
+</button>
+
+
+<button
+class="btn special"
+onclick="deleteLast()">
+
+⌫
+
+</button>
+
+
+<button
+class="btn special"
+onclick="toggleSign()">
+
+±
+
+</button>
+
+
+<button
+class="btn special"
+onclick="inputPercent()">
+
+%
+
+</button>
+
+
+<button
+class="btn operator"
+onclick="inputOperator('/')">
+
+÷
+
+</button>
+
+
+<button
+class="btn"
+onclick="inputNumber('7')">
+
+7
+
+</button>
+
+
+<button
+class="btn"
+onclick="inputNumber('8')">
+
+8
+
+</button>
+
+
+<button
+class="btn"
+onclick="inputNumber('9')">
+
+9
+
+</button>
+
+
+<button
+class="btn special"
+onclick="inputParenthesis('(')">
+
+(
+
+</button>
+
+
+<button
+class="btn operator"
+onclick="inputOperator('*')">
+
+×
+
+</button>
+
+
+<button
+class="btn"
+onclick="inputNumber('4')">
+
+4
+
+</button>
+
+
+<button
+class="btn"
+onclick="inputNumber('5')">
+
+5
+
+</button>
+
+
+<button
+class="btn"
+onclick="inputNumber('6')">
+
+6
+
+</button>
+
+
+<button
+class="btn special"
+onclick="inputParenthesis(')')">
+
+)
+
+</button>
+
+
+<button
+class="btn operator"
+onclick="inputOperator('-')">
+
+−
+
+</button>
+
+
+<button
+class="btn"
+onclick="inputNumber('1')">
+
+1
+
+</button>
+
+
+<button
+class="btn"
+onclick="inputNumber('2')">
+
+2
+
+</button>
+
+
+<button
+class="btn"
+onclick="inputNumber('3')">
+
+3
+
+</button>
+
+
+<button
+class="btn special"
+onclick="inputOperator('^')">
+
+xʸ
+
+</button>
+
+
+<button
+class="btn operator"
+onclick="inputOperator('+')">
+
++
+
+</button>
+
+
+<button
+class="btn special"
+onclick="insertConstant('π')">
+
+π
+
+</button>
+
+
+<button
+class="btn"
+onclick="inputNumber('0')">
+
+0
+
+</button>
+
+
+<button
+class="btn"
+onclick="inputDecimal()">
+
+.
+
+</button>
+
+
+<button
+class="btn special"
+onclick="inputOperator('^')">
+
+EXP
+
+</button>
+
+
+<button
+class="btn equal"
+onclick="calculate()">
+
+=
+
+</button>
+
+
+</div>
+
+</section>
+
+
+<!-- HISTORY -->
+
+<section class="history">
+
+<div class="history-head">
+
+<h2>
+🕘 History
+</h2>
+
+<button onclick="clearHistory()">
+Clear
+</button>
+
+</div>
+
+
+<div id="historyList">
+
+<div class="empty">
+No calculations yet
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<footer class="footer">
+
+CalcPro • Scientific Calculator
+
+</footer>
+
+
+</div>
+
+
+<script>
+
+/* =========================
+STATE
+========================= */
+
+let current = "0";
+
+let expression = "";
+
+let angleMode = "DEG";
+
+
+/* =========================
+DISPLAY
+========================= */
+
+function update(){
+
+    document
+    .getElementById("result")
+    .textContent = current;
+
+    document
+    .getElementById("expression")
+    .textContent =
+    expression;
+
+}
+
+
+/* =========================
+NUMBER
+========================= */
+
+function inputNumber(number){
+
+    if(
+        current === "Error" ||
+        current === "∞"
+    ){
+
+        current = "0";
+
+    }
+
+
+    if(current === "0"){
+
+        current = number;
+
+    }
+
+    else{
+
+        current += number;
+
+    }
+
+
+    update();
+
+}
+
+
+/* =========================
+DECIMAL
+========================= */
+
+function inputDecimal(){
+
+    const parts =
+    current.split(
+        /[+\-*/^()]/
+    );
+
+    const last =
+    parts[parts.length - 1];
+
+
+    if(
+        !last.includes(".")
+    ){
+
+        current += ".";
+
+    }
+
+
+    update();
+
+}
+
+
+/* =========================
+OPERATOR
+========================= */
+
+function inputOperator(op){
+
+    if(
+        current === "Error"
+    ){
+
+        return;
+
+    }
+
+
+    const last =
+    current.slice(-1);
+
+
+    if(
+        "+-*/^".includes(last)
+    ){
+
+        current =
+        current.slice(0,-1);
+
+    }
+
+
+    current += op;
+
+    update();
+
+}
+
+
+/* =========================
+PARENTHESIS
+========================= */
+
+function inputParenthesis(value){
+
+    if(
+        current === "0" &&
+        value === "("
+    ){
+
+        current = value;
+
+    }
+
+    else{
+
+        current += value;
+
+    }
+
+
+    update();
+
+}
+
+
+/* =========================
+CONSTANT
+========================= */
+
+function insertConstant(value){
+
+    if(current === "0"){
+
+        current = value;
+
+    }
+
+    else{
+
+        current += value;
+
+    }
+
+
+    update();
+
+}
+
+
+/* =========================
+SIGN
+========================= */
+
+function toggleSign(){
+
+    if(current === "0"){
+        return;
+    }
+
+
+    if(
+        current.startsWith("-")
+    ){
+
+        current =
+        current.substring(1);
+
+    }
+
+    else{
+
+        current =
+        "-" + current;
+
+    }
+
+
+    update();
+
+}
+
+
+/* =========================
+DELETE
+========================= */
+
+function deleteLast(){
+
+    if(
+        current === "Error"
+    ){
+
+        clearAll();
+
+        return;
+
+    }
+
+
+    if(
+        current.length <= 1
+    ){
+
+        current = "0";
+
+    }
+
+    else{
+
+        current =
+        current.slice(0,-1);
+
+    }
+
+
+    update();
+
+}
+
+
+/* =========================
+CLEAR
+========================= */
+
+function clearAll(){
+
+    current = "0";
+
+    expression = "";
+
+    update();
+
+}
+
+
+/* =========================
+PERCENT
+========================= */
+
+function inputPercent(){
+
+    try{
+
+        const value =
+        evaluateExpression(current);
+
+        current =
+        cleanNumber(value / 100);
+
+        expression =
+        "Percent";
+
+    }
+
+    catch{
+
+        current = "Error";
+
+    }
+
+
+    update();
+
+}
+
+
+/* =========================
+SCIENTIFIC
+========================= */
+
+function scientific(type){
+
+    try{
+
+        let value =
+        evaluateExpression(current);
+
+        let result;
+
+
+        switch(type){
+
+            case "sin":
+
+                result =
+                Math.sin(
+                    toRadians(value)
+                );
+
+                break;
+
+
+            case "cos":
+
+                result =
+                Math.cos(
+                    toRadians(value)
+                );
+
+                break;
+
+
+            case "tan":
+
+                result =
+                Math.tan(
+                    toRadians(value)
+                );
+
+                break;
+
+
+            case "asin":
+
+                result =
+                fromRadians(
+                    Math.asin(value)
+                );
+
+                break;
+
+
+            case "acos":
+
+                result =
+                fromRadians(
+                    Math.acos(value)
+                );
+
+                break;
+
+
+            case "atan":
+
+                result =
+                fromRadians(
+                    Math.atan(value)
+                );
+
+                break;
+
+
+            case "log":
+
+                result =
+                Math.log10(value);
+
+                break;
+
+
+            case "ln":
+
+                result =
+                Math.log(value);
+
+                break;
+
+
+            case "sqrt":
+
+                result =
+                Math.sqrt(value);
+
+                break;
+
+
+            case "square":
+
+                result =
+                value * value;
+
+                break;
+
+
+            case "cube":
+
+                result =
+                value * value * value;
+
+                break;
+
+
+            case "factorial":
+
+                result =
+                factorial(value);
+
+                break;
+
+
+            case "reciprocal":
+
+                result =
+                1 / value;
+
+                break;
+
+        }
+
+
+        if(
+            !Number.isFinite(result)
+        ){
+
+            throw new Error();
+
+        }
+
+
+        expression =
+        type + "(" +
+        current + ")";
+
+        current =
+        cleanNumber(result);
+
+        addHistory(
+            expression,
+            current
+        );
+
+    }
+
+    catch{
+
+        current = "Error";
+
+    }
+
+
+    update();
+
+}
+
+
+/* =========================
+FACTORIAL
+========================= */
+
+function factorial(n){
+
+    if(
+        n < 0 ||
+        !Number.isInteger(n) ||
+        n > 170
+    ){
+
+        throw new Error();
+
+    }
+
+
+    let result = 1;
+
+
+    for(
+        let i = 2;
+        i <= n;
+        i++
+    ){
+
+        result *= i;
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================
+ANGLE
+========================= */
+
+function toggleAngle(){
+
+    angleMode =
+    angleMode === "DEG"
+    ? "RAD"
+    : "DEG";
+
+
+    document
+    .getElementById(
+        "angleMode"
+    )
+    .textContent =
+    angleMode;
+
+}
+
+
+/* =========================
+RADIANS
+========================= */
+
+function toRadians(value){
+
+    if(
+        angleMode === "RAD"
+    ){
+
+        return value;
+
+    }
+
+
+    return value *
+    Math.PI / 180;
+
+}
+
+
+function fromRadians(value){
+
+    if(
+        angleMode === "RAD"
+    ){
+
+        return value;
+
+    }
+
+
+    return value *
+    180 / Math.PI;
+
+}
+
+
+/* =========================
+CALCULATE
+========================= */
+
+function calculate(){
+
+    try{
+
+        const original =
+        current;
+
+        const result =
+        evaluateExpression(
+            current
+        );
+
+
+        current =
+        cleanNumber(result);
+
+        expression =
+        original + " =";
+
+
+        addHistory(
+            original,
+            current
+        );
+
+    }
+
+    catch{
+
+        current = "Error";
+
+    }
+
+
+    update();
+
+}
+
+
+/* =========================
+EXPRESSION ENGINE
+========================= */
+
+function evaluateExpression(input){
+
+    let expr =
+    input;
+
+
+    expr =
+    expr.replace(
+        /π/g,
+        "Math.PI"
+    );
+
+
+    expr =
+    expr.replace(
+        /\be\b/g,
+        "Math.E"
+    );
+
+
+    expr =
+    expr.replace(
+        /×/g,
+        "*"
+    );
+
+
+    expr =
+    expr.replace(
+        /÷/g,
+        "/"
+    );
+
+
+    expr =
+    expr.replace(
+        /\^/g,
+        "**"
+    );
+
+
+    /*
+    Only mathematical
+    characters are allowed.
+    */
+
+    if(
+        !/^[0-9+\-*/().\sA-Za-z_*]+$/
+        .test(expr)
+    ){
+
+        throw new Error();
+
+    }
+
+
+    /*
+    Math constants only.
+    */
+
+    if(
+        /[A-DF-Za-df-z]/.test(
+            expr
+        )
+    ){
+
+        /*
+        Allow only Math.PI
+        and Math.E generated above.
+        */
+
+        const allowed =
+        expr.replace(
+            /Math\.(PI|E)/g,
+            ""
+        );
+
+
+        if(
+            /[A-Za-z]/.test(
+                allowed
+            )
+        ){
+
+            throw new Error();
+
+        }
+
+    }
+
+
+    return Function(
+        '"use strict";return (' +
+        expr +
+        ')'
+    )();
+
+}
+
+
+/* =========================
+CLEAN NUMBER
+========================= */
+
+function cleanNumber(number){
+
+    if(
+        !Number.isFinite(number)
+    ){
+
+        throw new Error();
+
+    }
+
+
+    return String(
+        Number(
+            number.toPrecision(12)
+        )
+    );
+
+}
+
+
+/* =========================
+HISTORY
+========================= */
+
+function addHistory(
+    expression,
+    result
+){
+
+    let data =
+    JSON.parse(
+        localStorage.getItem(
+            "scientific_history"
+        ) || "[]"
+    );
+
+
+    data.unshift({
+
+        expression:
+        expression,
+
+        result:
+        result
+
+    });
+
+
+    data =
+    data.slice(0,30);
+
+
+    localStorage.setItem(
+        "scientific_history",
+        JSON.stringify(data)
+    );
+
+
+    renderHistory();
+
+}
+
+
+function renderHistory(){
+
+    const list =
+    document.getElementById(
+        "historyList"
+    );
+
+
+    const data =
+    JSON.parse(
+        localStorage.getItem(
+            "scientific_history"
+        ) || "[]"
+    );
+
+
+    if(
+        data.length === 0
+    ){
+
+        list.innerHTML =
+        `
+        <div class="empty">
+        No calculations yet
+        </div>
+        `;
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+    data.map(
+        item =>
+
+        `
+        <div class="history-item">
+
+            <div class="history-expression">
+            ${escapeHTML(
+                item.expression
+            )}
+            </div>
+
+            <div class="history-result">
+            = ${escapeHTML(
+                item.result
+            )}
+            </div>
+
+        </div>
+        `
+
+    ).join("");
+
+}
+
+
+function clearHistory(){
+
+    localStorage.removeItem(
+        "scientific_history"
+    );
+
+    renderHistory();
+
+}
+
+
+/* =========================
+ESCAPE HTML
+========================= */
+
+function escapeHTML(text){
+
+    return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+KEYBOARD
+========================= */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+    const key =
+    event.key;
+
+
+    if(
+        key >= "0" &&
+        key <= "9"
+    ){
+
+        inputNumber(key);
+        return;
+
+    }
+
+
+    if(key === "."){
+
+        inputDecimal();
+        return;
+
+    }
+
+
+    if(
+        ["+","-","*","/","^"]
+        .includes(key)
+    ){
+
+        inputOperator(key);
+        return;
+
+    }
+
+
+    if(key === "%"){
+
+        inputPercent();
+        return;
+
+    }
+
+
+    if(
+        key === "Enter" ||
+        key === "="
+    ){
+
+        calculate();
+        return;
+
+    }
+
+
+    if(key === "Backspace"){
+
+        deleteLast();
+        return;
+
+    }
+
+
+    if(key === "Escape"){
+
+        clearAll();
+        return;
+
+    }
+
+
+    if(key === "("){
+
+        inputParenthesis("(");
+        return;
+
+    }
+
+
+    if(key === ")"){
+
+        inputParenthesis(")");
+        return;
+
+    }
+
+});
+
+
+/* =========================
+RIPPLE ANIMATION
+========================= */
+
+document.addEventListener(
+"click",
+function(event){
+
+    const button =
+    event.target.closest(
+        "button"
+    );
+
+
+    if(!button){
+        return;
+    }
+
+
+    const ripple =
+    document.createElement(
+        "span"
+    );
+
+
+    ripple.className =
+    "ripple";
+
+
+    const rect =
+    button.getBoundingClientRect();
+
+
+    const size =
+    Math.max(
+        rect.width,
+        rect.height
+    );
+
+
+    ripple.style.width =
+    size + "px";
+
+
+    ripple.style.height =
+    size + "px";
+
+
+    ripple.style.left =
+    (
+        event.clientX -
+        rect.left -
+        size / 2
+    ) + "px";
+
+
+    ripple.style.top =
+    (
+        event.clientY -
+        rect.top -
+        size / 2
+    ) + "px";
+
+
+    button.appendChild(
+        ripple
+    );
+
+
+    setTimeout(
+        function(){
+
+            ripple.remove();
+
+        },
+        600
+    );
+
+});
+
+
+/* START */
+
+renderHistory();
+
+update();
+
+</script>
+
+</body>
+
+</html>

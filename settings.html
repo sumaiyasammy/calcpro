@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071018">
+
+<title>CalcPro - Settings</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+    min-height:100vh;
+    background:#05090e;
+    color:#fff;
+    font-family:Arial,sans-serif;
+}
+
+.app{
+    min-height:100vh;
+    background:#080f17;
+}
+
+.header{
+    height:70px;
+    padding:0 15px;
+
+    display:flex;
+    align-items:center;
+    gap:13px;
+
+    background:#091019;
+    border-bottom:1px solid #223040;
+}
+
+.back{
+    width:44px;
+    height:44px;
+
+    border-radius:13px;
+    border:1px solid #29394a;
+
+    background:#111b26;
+    color:#fff;
+
+    font-size:28px;
+}
+
+.header-title{
+    font-size:21px;
+    font-weight:800;
+}
+
+.header-title span{
+    color:#00d4ed;
+}
+
+.main{
+    width:100%;
+    max-width:600px;
+
+    margin:auto;
+    padding:15px;
+}
+
+.section-title{
+    margin:15px 3px 9px;
+
+    color:#718095;
+    font-size:11px;
+    font-weight:bold;
+
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.card{
+    overflow:hidden;
+
+    border:1px solid #253646;
+    border-radius:19px;
+
+    background:#0d1721;
+}
+
+.row{
+    min-height:67px;
+
+    padding:11px 14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+
+    border-bottom:1px solid #1d2a37;
+}
+
+.row:last-child{
+    border-bottom:0;
+}
+
+.info{
+    min-width:0;
+}
+
+.name{
+    font-size:15px;
+    font-weight:600;
+}
+
+.description{
+    margin-top:4px;
+
+    color:#68798a;
+    font-size:10px;
+}
+
+select{
+    width:125px;
+
+    padding:10px 8px;
+
+    border:1px solid #304354;
+    border-radius:10px;
+
+    outline:none;
+
+    background:#101c27;
+    color:#fff;
+}
+
+.switch{
+    width:49px;
+    height:28px;
+
+    border-radius:20px;
+
+    background:#263544;
+
+    position:relative;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.switch::after{
+    content:"";
+
+    width:22px;
+    height:22px;
+
+    border-radius:50%;
+
+    background:#9aa8b6;
+
+    position:absolute;
+
+    top:3px;
+    left:3px;
+
+    transition:.2s;
+}
+
+.switch.active{
+    background:#00aeca;
+}
+
+.switch.active::after{
+    left:24px;
+    background:#fff;
+}
+
+.action{
+    width:100%;
+
+    min-height:56px;
+
+    border:0;
+
+    background:transparent;
+
+    color:#fff;
+
+    text-align:left;
+
+    padding:0 14px;
+
+    font-size:14px;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.action:active{
+    background:#142330;
+}
+
+.action.danger{
+    color:#ff7180;
+}
+
+.about{
+    margin-top:20px;
+
+    padding:20px;
+
+    border:1px solid #253646;
+    border-radius:20px;
+
+    background:
+    linear-gradient(
+        145deg,
+        #0d1721,
+        #09121b
+    );
+
+    text-align:center;
+}
+
+.app-icon{
+    width:55px;
+    height:55px;
+
+    margin:0 auto 10px;
+
+    border-radius:16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00c9e8,
+        #5367ff
+    );
+
+    font-size:28px;
+    font-weight:900;
+}
+
+.about h2{
+    font-size:19px;
+}
+
+.about h2 span{
+    color:#00d4ed;
+}
+
+.about p{
+    margin-top:6px;
+
+    color:#657586;
+    font-size:11px;
+}
+
+.version{
+    margin-top:12px;
+
+    color:#536272;
+    font-size:10px;
+}
+
+.ripple{
+    position:absolute;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.16);
+
+    transform:scale(0);
+
+    animation:ripple .55s linear;
+
+    pointer-events:none;
+}
+
+@keyframes ripple{
+
+    to{
+        transform:scale(4);
+        opacity:0;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<header class="header">
+
+<button
+class="back"
+onclick="history.back()">
+‹
+</button>
+
+<div class="header-title">
+Calc<span>Pro</span> Settings
+</div>
+
+</header>
+
+
+
+<main class="main">
+
+
+<div class="section-title">
+Appearance
+</div>
+
+<div class="card">
+
+<div class="row">
+
+<div class="info">
+
+<div class="name">
+🌙 Dark Mode
+</div>
+
+<div class="description">
+Use dark appearance
+</div>
+
+</div>
+
+<div
+id="darkSwitch"
+class="switch active"
+onclick="toggleDark()">
+</div>
+
+</div>
+
+
+<div class="row">
+
+<div class="info">
+
+<div class="name">
+🧮 Default Calculator
+</div>
+
+<div class="description">
+Choose calculator at startup
+</div>
+
+</div>
+
+<select id="defaultCalc"
+onchange="saveDefault()">
+
+<option value="index.html">
+Home
+</option>
+
+<option value="general.html">
+General
+</option>
+
+<option value="student.html">
+Student
+</option>
+
+<option value="business.html">
+Business
+</option>
+
+<option value="scientific.html">
+Scientific
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+
+<div class="section-title">
+Controls
+</div>
+
+<div class="card">
+
+
+<div class="row">
+
+<div class="info">
+
+<div class="name">
+🔊 Button Sound
+</div>
+
+<div class="description">
+Play sound when pressing buttons
+</div>
+
+</div>
+
+<div
+id="soundSwitch"
+class="switch active"
+onclick="toggleSound()">
+</div>
+
+</div>
+
+
+<div class="row">
+
+<div class="info">
+
+<div class="name">
+📳 Vibration
+</div>
+
+<div class="description">
+Vibrate on supported devices
+</div>
+
+</div>
+
+<div
+id="vibrationSwitch"
+class="switch active"
+onclick="toggleVibration()">
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="section-title">
+Data
+</div>
+
+<div class="card">
+
+
+<button
+class="action"
+onclick="clearHistory()">
+
+🧹 &nbsp; Clear Calculation History
+
+</button>
+
+
+<button
+class="action danger"
+onclick="resetSettings()">
+
+⚠️ &nbsp; Reset All Settings
+
+</button>
+
+
+</div>
+
+
+
+<div class="section-title">
+About
+</div>
+
+
+<div class="about">
+
+<div class="app-icon">
+=
+</div>
+
+<h2>
+Calc<span>Pro</span>
+</h2>
+
+<p>
+Smart Professional Calculator
+</p>
+
+<div class="version">
+Version 1.0.0
+</div>
+
+</div>
+
+
+</main>
+
+</div>
+
+
+
+<script>
+
+/* SETTINGS */
+
+const SETTINGS_KEY =
+"calcpro_settings";
+
+
+let settings =
+JSON.parse(
+localStorage.getItem(
+SETTINGS_KEY
+) || "{}"
+);
+
+
+if(settings.sound === undefined){
+    settings.sound = true;
+}
+
+if(settings.vibration === undefined){
+    settings.vibration = true;
+}
+
+if(settings.dark === undefined){
+    settings.dark = true;
+}
+
+if(!settings.defaultCalc){
+    settings.defaultCalc =
+    "index.html";
+}
+
+
+/* SAVE */
+
+function save(){
+
+    localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(settings)
+    );
+
+}
+
+
+/* SWITCH UI */
+
+function updateSwitches(){
+
+    document
+    .getElementById("darkSwitch")
+    .classList.toggle(
+        "active",
+        settings.dark
+    );
+
+    document
+    .getElementById("soundSwitch")
+    .classList.toggle(
+        "active",
+        settings.sound
+    );
+
+    document
+    .getElementById("vibrationSwitch")
+    .classList.toggle(
+        "active",
+        settings.vibration
+    );
+
+    document
+    .getElementById("defaultCalc")
+    .value =
+    settings.defaultCalc;
+
+}
+
+
+/* DARK */
+
+function toggleDark(){
+
+    settings.dark =
+    !settings.dark;
+
+    save();
+
+    updateSwitches();
+
+}
+
+
+/* SOUND */
+
+function toggleSound(){
+
+    settings.sound =
+    !settings.sound;
+
+    save();
+
+    updateSwitches();
+
+}
+
+
+/* VIBRATION */
+
+function toggleVibration(){
+
+    settings.vibration =
+    !settings.vibration;
+
+    save();
+
+    updateSwitches();
+
+}
+
+
+/* DEFAULT CALCULATOR */
+
+function saveDefault(){
+
+    settings.defaultCalc =
+    document
+    .getElementById("defaultCalc")
+    .value;
+
+    save();
+
+}
+
+
+/* CLEAR HISTORY */
+
+function clearHistory(){
+
+    const confirmClear =
+    confirm(
+        "সব calculation history মুছে ফেলবেন?"
+    );
+
+    if(!confirmClear){
+        return;
+    }
+
+    localStorage.removeItem(
+        "calcpro_history"
+    );
+
+    alert(
+        "Calculation history cleared."
+    );
+
+}
+
+
+/* RESET */
+
+function resetSettings(){
+
+    const confirmReset =
+    confirm(
+        "সব settings reset করবেন?"
+    );
+
+    if(!confirmReset){
+        return;
+    }
+
+    localStorage.removeItem(
+        SETTINGS_KEY
+    );
+
+    location.reload();
+
+}
+
+
+/* BUTTON RIPPLE */
+
+document.addEventListener(
+"click",
+function(event){
+
+    const button =
+    event.target.closest(
+        "button"
+    );
+
+    if(!button){
+        return;
+    }
+
+    const ripple =
+    document.createElement(
+        "span"
+    );
+
+    ripple.className =
+    "ripple";
+
+    const rect =
+    button.getBoundingClientRect();
+
+    const size =
+    Math.max(
+        rect.width,
+        rect.height
+    );
+
+    ripple.style.width =
+    size + "px";
+
+    ripple.style.height =
+    size + "px";
+
+    ripple.style.left =
+    (
+        event.clientX -
+        rect.left -
+        size / 2
+    ) + "px";
+
+    ripple.style.top =
+    (
+        event.clientY -
+        rect.top -
+        size / 2
+    ) + "px";
+
+    button.appendChild(
+        ripple
+    );
+
+    setTimeout(
+        () => ripple.remove(),
+        600
+    );
+
+});
+
+
+/* START */
+
+updateSwitches();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+content="#071018">
+
+<title>CalcPro - Help & Guide</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+    min-height:100vh;
+    background:#05090e;
+    color:#fff;
+    font-family:Arial,sans-serif;
+}
+
+.app{
+    min-height:100vh;
+    background:#080f17;
+}
+
+.header{
+    height:70px;
+    padding:0 15px;
+
+    display:flex;
+    align-items:center;
+    gap:13px;
+
+    background:#091019;
+    border-bottom:1px solid #223040;
+
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.back{
+    width:44px;
+    height:44px;
+
+    border-radius:13px;
+    border:1px solid #29394a;
+
+    background:#111b26;
+    color:#fff;
+
+    font-size:28px;
+}
+
+.title{
+    font-size:21px;
+    font-weight:800;
+}
+
+.title span{
+    color:#00d4ed;
+}
+
+.main{
+    width:100%;
+    max-width:650px;
+
+    margin:auto;
+    padding:15px;
+}
+
+.intro{
+    padding:20px;
+
+    border:1px solid #263747;
+    border-radius:22px;
+
+    background:
+    linear-gradient(
+        145deg,
+        #0e1b27,
+        #09121b
+    );
+
+    margin-bottom:18px;
+}
+
+.intro-icon{
+    width:55px;
+    height:55px;
+
+    border-radius:16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00c9e8,
+        #5367ff
+    );
+
+    font-size:28px;
+    font-weight:900;
+
+    margin-bottom:13px;
+}
+
+.intro h1{
+    font-size:24px;
+}
+
+.intro h1 span{
+    color:#00d4ed;
+}
+
+.intro p{
+    margin-top:7px;
+
+    color:#77889a;
+
+    font-size:12px;
+    line-height:1.6;
+}
+
+.section{
+    margin-top:15px;
+}
+
+.section-title{
+    margin:0 3px 9px;
+
+    color:#718095;
+
+    font-size:11px;
+    font-weight:bold;
+
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.card{
+    border:1px solid #253646;
+    border-radius:19px;
+
+    background:#0d1721;
+
+    overflow:hidden;
+}
+
+.item{
+    padding:15px;
+
+    border-bottom:1px solid #1d2a37;
+}
+
+.item:last-child{
+    border-bottom:0;
+}
+
+.item-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-size:15px;
+    font-weight:bold;
+}
+
+.item-icon{
+    width:35px;
+    height:35px;
+
+    border-radius:10px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#142633;
+
+    font-size:18px;
+}
+
+.item p{
+    margin-top:9px;
+
+    color:#718193;
+
+    font-size:11px;
+    line-height:1.7;
+}
+
+.example{
+    margin-top:9px;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    background:#071019;
+
+    border:1px solid #1c2c39;
+
+    color:#00d4ed;
+
+    font-family:monospace;
+
+    font-size:11px;
+}
+
+.tip{
+    margin-top:18px;
+
+    padding:15px;
+
+    border-radius:17px;
+
+    background:#10202a;
+
+    border:1px solid #23404c;
+}
+
+.tip strong{
+    color:#00d4ed;
+}
+
+.tip p{
+    margin-top:5px;
+
+    color:#748596;
+
+    font-size:11px;
+
+    line-height:1.6;
+}
+
+.footer{
+    padding:25px 15px;
+
+    text-align:center;
+
+    color:#4f5e6f;
+
+    font-size:10px;
+}
+
+.ripple{
+    position:absolute;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.16);
+
+    transform:scale(0);
+
+    animation:ripple .55s linear;
+
+    pointer-events:none;
+}
+
+@keyframes ripple{
+
+    to{
+        transform:scale(4);
+        opacity:0;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<header class="header">
+
+<button
+class="back"
+onclick="history.back()">
+
+‹
+
+</button>
+
+<div class="title">
+
+Calc<span>Pro</span> Help
+
+</div>
+
+</header>
+
+
+
+<main class="main">
+
+
+<section class="intro">
+
+<div class="intro-icon">
+?
+</div>
+
+<h1>
+Calc<span>Pro</span> Guide
+</h1>
+
+<p>
+Calculator-এর বিভিন্ন Mode এবং
+Feature কীভাবে ব্যবহার করবেন,
+এই পেজে তার সহজ নির্দেশনা দেওয়া হয়েছে।
+</p>
+
+</section>
+
+
+
+<!-- GENERAL -->
+
+<section class="section">
+
+<div class="section-title">
+General Calculator
+</div>
+
+<div class="card">
+
+<div class="item">
+
+<div class="item-head">
+
+<div class="item-icon">
+🧮
+</div>
+
+General হিসাব
+
+</div>
+
+<p>
+দৈনন্দিন যোগ, বিয়োগ, গুণ, ভাগ,
+শতকরা এবং Decimal হিসাবের জন্য
+General Calculator ব্যবহার করুন।
+</p>
+
+<div class="example">
+25 + 35 × 2 = 95
+</div>
+
+</div>
+
+
+<div class="item">
+
+<div class="item-head">
+
+<div class="item-icon">
+%
+</div>
+
+Percentage
+
+</div>
+
+<p>
+Percentage হিসাব করতে সংখ্যার পরে
+% button ব্যবহার করুন।
+</p>
+
+<div class="example">
+200 → % → 2
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- STUDENT -->
+
+<section class="section">
+
+<div class="section-title">
+Student Calculator
+</div>
+
+<div class="card">
+
+<div class="item">
+
+<div class="item-head">
+
+<div class="item-icon">
+🎓
+</div>
+
+Student Mode
+
+</div>
+
+<p>
+শিক্ষার্থীদের গণিতের বিভিন্ন
+সমস্যা সমাধানের জন্য Student
+Calculator ব্যবহার করা যাবে।
+</p>
+
+<div class="example">
+√25 = 5
+<br>
+5² = 25
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- BUSINESS -->
+
+<section class="section">
+
+<div class="section-title">
+Business Calculator
+</div>
+
+<div class="card">
+
+<div class="item">
+
+<div class="item-head">
+
+<div class="item-icon">
+💼
+</div>
+
+Business হিসাব
+
+</div>
+
+<p>
+ব্যবসার লাভ, ক্ষতি, Discount,
+VAT, Percentage এবং অন্যান্য
+ব্যবসায়িক হিসাবের জন্য ব্যবহার করুন।
+</p>
+
+<div class="example">
+Cost = 500
+<br>
+Sell = 650
+<br>
+Profit = 150
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- SCIENTIFIC -->
+
+<section class="section">
+
+<div class="section-title">
+Scientific Calculator
+</div>
+
+<div class="card">
+
+<div class="item">
+
+<div class="item-head">
+
+<div class="item-icon">
+🔬
+</div>
+
+Scientific Mode
+
+</div>
+
+<p>
+Advanced mathematical calculation,
+যেমন Power, Square Root,
+Trigonometry এবং অন্যান্য
+scientific operation-এর জন্য।
+</p>
+
+<div class="example">
+sin(30°) = 0.5
+<br>
+2³ = 8
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- HISTORY -->
+
+<section class="section">
+
+<div class="section-title">
+History
+</div>
+
+<div class="card">
+
+<div class="item">
+
+<div class="item-head">
+
+<div class="item-icon">
+🕘
+</div>
+
+Calculation History
+
+</div>
+
+<p>
+আগের করা হিসাবগুলো History section-এ
+সংরক্ষিত থাকতে পারে। প্রয়োজন হলে
+সেখান থেকে আবার result ব্যবহার করতে পারবেন।
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- SETTINGS -->
+
+<section class="section">
+
+<div class="section-title">
+Settings
+</div>
+
+<div class="card">
+
+<div class="item">
+
+<div class="item-head">
+
+<div class="item-icon">
+⚙️
+</div>
+
+App Settings
+
+</div>
+
+<p>
+Settings থেকে Dark Mode, Button Sound,
+Vibration, Default Calculator এবং
+History control করা যাবে।
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- OFFLINE -->
+
+<section class="section">
+
+<div class="section-title">
+Offline Mode
+</div>
+
+<div class="card">
+
+<div class="item">
+
+<div class="item-head">
+
+<div class="item-icon">
+📡
+</div>
+
+Offline Calculator
+
+</div>
+
+<p>
+অ্যাপের প্রয়োজনীয় ফাইল cache করা থাকলে
+ইন্টারনেট সংযোগ না থাকলেও Calculator-এর
+বেসিক অংশ ব্যবহার করা সম্ভব।
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- TIP -->
+
+<div class="tip">
+
+<strong>💡 Tip</strong>
+
+<p>
+দ্রুত হিসাবের জন্য Keyboard থাকলে
+number, +, -, *, /, Enter এবং
+Backspace ব্যবহার করতে পারবেন।
+</p>
+
+</div>
+
+
+</main>
+
+
+
+<footer class="footer">
+
+CalcPro • Help & Guide
+
+</footer>
+
+
+</div>
+
+
+
+<script>
+
+/* Button Ripple */
+
+document.addEventListener(
+"click",
+function(event){
+
+    const button =
+    event.target.closest(
+        "button"
+    );
+
+    if(!button){
+        return;
+    }
+
+    const ripple =
+    document.createElement(
+        "span"
+    );
+
+    ripple.className =
+    "ripple";
+
+    const rect =
+    button.getBoundingClientRect();
+
+    const size =
+    Math.max(
+        rect.width,
+        rect.height
+    );
+
+    ripple.style.width =
+    size + "px";
+
+    ripple.style.height =
+    size + "px";
+
+    ripple.style.left =
+    (
+        event.clientX -
+        rect.left -
+        size / 2
+    ) + "px";
+
+    ripple.style.top =
+    (
+        event.clientY -
+        rect.top -
+        size / 2
+    ) + "px";
+
+    button.appendChild(
+        ripple
+    );
+
+    setTimeout(
+        () => ripple.remove(),
+        600
+    );
+
+});
+
+</script>
+
+
+</body>
+
+</html>

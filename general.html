@@ -1,0 +1,2227 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+content="#080d14">
+
+<title>CalcPro - General Calculator</title>
+
+<style>
+
+/* =====================================
+   RESET
+===================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#05080d;
+    color:#fff;
+    font-family:
+        Arial,
+        "Noto Sans Bengali",
+        sans-serif;
+}
+
+
+/* =====================================
+   APP
+===================================== */
+
+.app{
+    width:100%;
+    min-height:100vh;
+
+    background:#080d14;
+
+    display:flex;
+    flex-direction:column;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.header{
+
+    height:70px;
+
+    padding:
+        0 14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:#090e16;
+
+    border-bottom:
+        1px solid #202b3a;
+
+    position:sticky;
+    top:0;
+
+    z-index:20;
+}
+
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+
+.logo-icon{
+
+    width:43px;
+    height:43px;
+
+    border-radius:13px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00c9e8,
+        #5b63ff
+    );
+
+    font-size:21px;
+
+    font-weight:900;
+}
+
+
+.logo-text{
+
+    font-size:21px;
+
+    font-weight:900;
+}
+
+
+.logo-text span{
+
+    color:#00d5ed;
+
+}
+
+
+.back{
+
+    width:44px;
+    height:44px;
+
+    border-radius:13px;
+
+    border:
+        1px solid #293748;
+
+    background:#111923;
+
+    color:#fff;
+
+    font-size:28px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================
+   MAIN
+===================================== */
+
+.main{
+
+    width:100%;
+
+    max-width:700px;
+
+    margin:auto;
+
+    padding:10px;
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+/* =====================================
+   TITLE
+===================================== */
+
+.title{
+
+    padding:
+        6px 3px 10px;
+
+}
+
+
+.title h1{
+
+    font-size:24px;
+
+}
+
+
+.title p{
+
+    color:#748196;
+
+    font-size:12px;
+
+    margin-top:4px;
+
+}
+
+
+/* =====================================
+   CALCULATOR
+===================================== */
+
+.calculator{
+
+    width:100%;
+
+    padding:11px;
+
+    border-radius:22px;
+
+    background:#0b121b;
+
+    border:
+        1px solid #202d3d;
+
+}
+
+
+/* =====================================
+   DISPLAY
+===================================== */
+
+.display{
+
+    width:100%;
+
+    min-height:170px;
+
+    padding:17px;
+
+    border-radius:19px;
+
+    background:#080e16;
+
+    border:
+        1px solid #1d2938;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    overflow:hidden;
+
+}
+
+
+.expression{
+
+    min-height:28px;
+
+    color:#68778b;
+
+    text-align:right;
+
+    font-size:17px;
+
+    overflow-x:auto;
+
+    white-space:nowrap;
+
+}
+
+
+.result{
+
+    min-height:60px;
+
+    margin-top:5px;
+
+    color:#fff;
+
+    text-align:right;
+
+    font-size:48px;
+
+    font-weight:700;
+
+    line-height:1.15;
+
+    overflow-x:auto;
+
+    white-space:nowrap;
+
+}
+
+
+/* =====================================
+   MEMORY
+===================================== */
+
+.memory{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap:6px;
+
+    margin-top:9px;
+
+}
+
+
+.memory button{
+
+    height:40px;
+
+    border-radius:11px;
+
+    border:
+        1px solid #253447;
+
+    background:#101923;
+
+    color:#8796a8;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    position:relative;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================
+   BUTTONS
+===================================== */
+
+.buttons{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:8px;
+
+    margin-top:9px;
+
+}
+
+
+.btn{
+
+    height:72px;
+
+    border-radius:17px;
+
+    border:
+        1px solid #273648;
+
+    background:#111923;
+
+    color:#fff;
+
+    font-size:28px;
+
+    font-weight:600;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:
+        transform .1s,
+        background .1s;
+
+    cursor:pointer;
+
+}
+
+
+.btn:active{
+
+    transform:scale(.94);
+
+    background:#1b2735;
+
+}
+
+
+.operator{
+
+    color:#00d7ee;
+
+    background:#101d2a;
+
+    border-color:#244454;
+
+}
+
+
+.clear{
+
+    color:#ff7c89;
+
+}
+
+
+.equal{
+
+    color:#fff;
+
+    border:0;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00b9db,
+        #5865ff
+    );
+
+}
+
+
+/* =====================================
+   HISTORY
+===================================== */
+
+.history{
+
+    margin-top:11px;
+
+    padding:14px;
+
+    border-radius:18px;
+
+    background:#0d151f;
+
+    border:
+        1px solid #202d3d;
+
+}
+
+
+.history-head{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:7px;
+
+}
+
+
+.history-head h2{
+
+    font-size:16px;
+
+}
+
+
+.history-head button{
+
+    border:0;
+
+    background:none;
+
+    color:#00d5ed;
+
+    font-size:11px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+}
+
+
+.history-item{
+
+    padding:9px 2px;
+
+    border-bottom:
+        1px solid #1d2836;
+
+}
+
+
+.history-expression{
+
+    color:#6f7d90;
+
+    font-size:12px;
+
+    text-align:right;
+
+}
+
+
+.history-result{
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    text-align:right;
+
+    margin-top:3px;
+
+}
+
+
+.history-mode{
+
+    color:#4e6176;
+
+    font-size:9px;
+
+    margin-top:3px;
+
+    text-align:right;
+
+}
+
+
+.empty{
+
+    color:#637084;
+
+    text-align:center;
+
+    padding:14px;
+
+    font-size:11px;
+
+}
+
+
+/* =====================================
+   RIPPLE
+===================================== */
+
+.ripple{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    transform:scale(0);
+
+    background:
+        rgba(255,255,255,.24);
+
+    pointer-events:none;
+
+    animation:
+        ripple .55s linear;
+
+}
+
+
+@keyframes ripple{
+
+    to{
+
+        transform:scale(4);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* =====================================
+   FOOTER
+===================================== */
+
+.footer{
+
+    text-align:center;
+
+    color:#4f5d70;
+
+    font-size:10px;
+
+    padding:16px;
+
+}
+
+
+/* =====================================
+   SMALL SCREEN
+===================================== */
+
+@media(max-width:390px){
+
+    .main{
+
+        padding:7px;
+
+    }
+
+
+    .calculator{
+
+        padding:8px;
+
+    }
+
+
+    .display{
+
+        min-height:155px;
+
+    }
+
+
+    .result{
+
+        font-size:42px;
+
+    }
+
+
+    .btn{
+
+        height:66px;
+
+        font-size:25px;
+
+    }
+
+}
+
+
+/* =====================================
+   VERY SMALL
+===================================== */
+
+@media(max-width:340px){
+
+    .btn{
+
+        height:61px;
+
+        font-size:23px;
+
+    }
+
+
+    .result{
+
+        font-size:37px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<!-- =================================
+     HEADER
+================================= -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            ＋
+        </div>
+
+        <div class="logo-text">
+            Calc<span>Pro</span>
+        </div>
+
+    </div>
+
+
+    <button
+        class="back"
+        onclick="history.back()">
+
+        ‹
+
+    </button>
+
+</header>
+
+
+<!-- =================================
+     MAIN
+================================= -->
+
+<main class="main">
+
+
+<div class="title">
+
+    <h1>
+        🧮 General Calculator
+    </h1>
+
+    <p>
+        দৈনন্দিন সব সাধারণ হিসাব সহজে করুন
+    </p>
+
+</div>
+
+
+<!-- =================================
+     CALCULATOR
+================================= -->
+
+<section class="calculator">
+
+
+<!-- DISPLAY -->
+
+<div class="display">
+
+    <div
+        id="expression"
+        class="expression">
+    </div>
+
+    <div
+        id="result"
+        class="result">
+
+        0
+
+    </div>
+
+</div>
+
+
+<!-- MEMORY -->
+
+<div class="memory">
+
+    <button onclick="memoryClear()">
+        MC
+    </button>
+
+    <button onclick="memoryRecall()">
+        MR
+    </button>
+
+    <button onclick="memoryAdd()">
+        M+
+    </button>
+
+    <button onclick="memorySubtract()">
+        M−
+    </button>
+
+    <button onclick="memoryStore()">
+        MS
+    </button>
+
+</div>
+
+
+<!-- BUTTONS -->
+
+<div class="buttons">
+
+
+<button
+    class="btn clear"
+    onclick="clearAll()">
+
+    AC
+
+</button>
+
+
+<button
+    class="btn"
+    onclick="deleteLast()">
+
+    ⌫
+
+</button>
+
+
+<button
+    class="btn operator"
+    onclick="inputPercent()">
+
+    %
+
+</button>
+
+
+<button
+    class="btn operator"
+    onclick="inputOperator('/')">
+
+    ÷
+
+</button>
+
+
+<button
+    class="btn"
+    onclick="inputNumber('7')">
+
+    7
+
+</button>
+
+
+<button
+    class="btn"
+    onclick="inputNumber('8')">
+
+    8
+
+</button>
+
+
+<button
+    class="btn"
+    onclick="inputNumber('9')">
+
+    9
+
+</button>
+
+
+<button
+    class="btn operator"
+    onclick="inputOperator('*')">
+
+    ×
+
+</button>
+
+
+<button
+    class="btn"
+    onclick="inputNumber('4')">
+
+    4
+
+</button>
+
+
+<button
+    class="btn"
+    onclick="inputNumber('5')">
+
+    5
+
+</button>
+
+
+<button
+    class="btn"
+    onclick="inputNumber('6')">
+
+    6
+
+</button>
+
+
+<button
+    class="btn operator"
+    onclick="inputOperator('-')">
+
+    −
+
+</button>
+
+
+<button
+    class="btn"
+    onclick="inputNumber('1')">
+
+    1
+
+</button>
+
+
+<button
+    class="btn"
+    onclick="inputNumber('2')">
+
+    2
+
+</button>
+
+
+<button
+    class="btn"
+    onclick="inputNumber('3')">
+
+    3
+
+</button>
+
+
+<button
+    class="btn operator"
+    onclick="inputOperator('+')">
+
+    +
+
+</button>
+
+
+<button
+    class="btn"
+    onclick="toggleSign()">
+
+    ±
+
+</button>
+
+
+<button
+    class="btn"
+    onclick="inputNumber('0')">
+
+    0
+
+</button>
+
+
+<button
+    class="btn"
+    onclick="inputDecimal()">
+
+    .
+
+</button>
+
+
+<button
+    class="btn equal"
+    onclick="calculate()">
+
+    =
+
+</button>
+
+
+</div>
+
+</section>
+
+
+<!-- =================================
+     HISTORY
+================================= -->
+
+<section class="history">
+
+<div class="history-head">
+
+    <h2>
+        🕘 Calculation History
+    </h2>
+
+    <button
+        onclick="clearHistory()">
+
+        Clear
+
+    </button>
+
+</div>
+
+
+<div id="historyList">
+
+    <div class="empty">
+        No calculations yet
+    </div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<footer class="footer">
+
+    CalcPro • General Calculator
+
+</footer>
+
+
+</div>
+
+
+<!-- =================================
+     CALCPRO ENGINE FILES
+================================= -->
+
+<script src="history.js"></script>
+
+<script src="calculator-core.js"></script>
+
+<script src="calcpro-engine.js"></script>
+
+
+<script>
+
+/* =====================================
+   STATE
+===================================== */
+
+let current = "0";
+
+let previous = null;
+
+let operator = null;
+
+let waiting = false;
+
+let expressionText = "";
+
+let memory = 0;
+
+
+/* =====================================
+   DISPLAY
+===================================== */
+
+function update(){
+
+    const resultElement =
+        document.getElementById("result");
+
+    const expressionElement =
+        document.getElementById("expression");
+
+
+    resultElement.textContent =
+        current === "Error"
+            ? "Error"
+            : formatDisplayValue(current);
+
+
+    expressionElement.textContent =
+        expressionText;
+
+}
+
+
+/* =====================================
+   DISPLAY NUMBER
+===================================== */
+
+function formatDisplayValue(value){
+
+    if(value === "Error"){
+        return "Error";
+    }
+
+
+    const number =
+        Number(value);
+
+
+    if(!Number.isFinite(number)){
+        return "Error";
+    }
+
+
+    return number.toLocaleString(
+        "en-US",
+        {
+            maximumFractionDigits:10
+        }
+    );
+
+}
+
+
+/* =====================================
+   INPUT NUMBER
+===================================== */
+
+function inputNumber(number){
+
+    if(current === "Error"){
+
+        clearAll();
+
+    }
+
+
+    if(waiting){
+
+        current = number;
+
+        waiting = false;
+
+    }
+
+    else if(current === "0"){
+
+        current = number;
+
+    }
+
+    else{
+
+        current += number;
+
+    }
+
+
+    update();
+
+}
+
+
+/* =====================================
+   DECIMAL
+===================================== */
+
+function inputDecimal(){
+
+    if(current === "Error"){
+        clearAll();
+    }
+
+
+    if(waiting){
+
+        current = "0.";
+
+        waiting = false;
+
+    }
+
+    else if(
+        !current.includes(".")
+    ){
+
+        current += ".";
+
+    }
+
+
+    update();
+
+}
+
+
+/* =====================================
+   OPERATOR
+===================================== */
+
+function inputOperator(op){
+
+    if(current === "Error"){
+        return;
+    }
+
+
+    if(
+        operator !== null &&
+        !waiting
+    ){
+
+        calculateInternal();
+
+    }
+
+
+    previous =
+        Number(current);
+
+
+    operator = op;
+
+    waiting = true;
+
+
+    expressionText =
+        formatNumber(previous)
+        + " "
+        + operatorSymbol(op);
+
+
+    update();
+
+}
+
+
+/* =====================================
+   INTERNAL CALCULATION
+===================================== */
+
+function calculateInternal(){
+
+    if(
+        previous === null ||
+        operator === null
+    ){
+
+        return null;
+
+    }
+
+
+    const a =
+        Number(previous);
+
+    const b =
+        Number(current);
+
+    let answer;
+
+
+    switch(operator){
+
+        case "+":
+
+            answer =
+                a + b;
+
+            break;
+
+
+        case "-":
+
+            answer =
+                a - b;
+
+            break;
+
+
+        case "*":
+
+            answer =
+                a * b;
+
+            break;
+
+
+        case "/":
+
+            if(b === 0){
+
+                current = "Error";
+
+                previous = null;
+
+                operator = null;
+
+                waiting = true;
+
+                update();
+
+                return null;
+
+            }
+
+            answer =
+                a / b;
+
+            break;
+
+
+        default:
+
+            return null;
+
+    }
+
+
+    current =
+        cleanNumber(answer);
+
+    previous = null;
+
+    operator = null;
+
+    waiting = true;
+
+
+    return answer;
+
+}
+
+
+/* =====================================
+   CALCULATE
+===================================== */
+
+function calculate(){
+
+    if(
+        previous === null ||
+        operator === null
+    ){
+
+        return;
+
+    }
+
+
+    const a =
+        previous;
+
+    const op =
+        operator;
+
+    const b =
+        Number(current);
+
+
+    const answer =
+        calculateInternal();
+
+
+    if(
+        current === "Error" ||
+        answer === null
+    ){
+
+        expressionText =
+            formatNumber(a)
+            + " "
+            + operatorSymbol(op)
+            + " "
+            + formatNumber(b);
+
+        update();
+
+        return;
+
+    }
+
+
+    expressionText =
+        formatNumber(a)
+        + " "
+        + operatorSymbol(op)
+        + " "
+        + formatNumber(b)
+        + " =";
+
+
+    /* ===============================
+       SAVE TO MASTER HISTORY
+    =============================== */
+
+    saveGeneralHistory(
+        expressionText,
+        current
+    );
+
+
+    update();
+
+}
+
+
+/* =====================================
+   PERCENT
+===================================== */
+
+function inputPercent(){
+
+    if(current === "Error"){
+        return;
+    }
+
+
+    const value =
+        Number(current);
+
+
+    if(
+        !Number.isFinite(value)
+    ){
+
+        return;
+
+    }
+
+
+    let result;
+
+
+    if(
+        previous !== null &&
+        operator !== null
+    ){
+
+        result =
+            previous *
+            value /
+            100;
+
+    }
+
+    else{
+
+        result =
+            value /
+            100;
+
+    }
+
+
+    current =
+        cleanNumber(result);
+
+    waiting = true;
+
+
+    expressionText =
+        formatNumber(value)
+        + "%";
+
+
+    update();
+
+}
+
+
+/* =====================================
+   SIGN
+===================================== */
+
+function toggleSign(){
+
+    if(
+        current === "0" ||
+        current === "Error"
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        current.startsWith("-")
+    ){
+
+        current =
+            current.substring(1);
+
+    }
+
+    else{
+
+        current =
+            "-" + current;
+
+    }
+
+
+    update();
+
+}
+
+
+/* =====================================
+   CLEAR
+===================================== */
+
+function clearAll(){
+
+    current = "0";
+
+    previous = null;
+
+    operator = null;
+
+    waiting = false;
+
+    expressionText = "";
+
+    update();
+
+}
+
+
+/* =====================================
+   DELETE
+===================================== */
+
+function deleteLast(){
+
+    if(current === "Error"){
+
+        clearAll();
+
+        return;
+
+    }
+
+
+    if(waiting){
+
+        return;
+
+    }
+
+
+    if(
+        current.length <= 1 ||
+        (
+            current.length === 2 &&
+            current.startsWith("-")
+        )
+    ){
+
+        current = "0";
+
+    }
+
+    else{
+
+        current =
+            current.slice(0,-1);
+
+    }
+
+
+    update();
+
+}
+
+
+/* =====================================
+   MEMORY CLEAR
+===================================== */
+
+function memoryClear(){
+
+    memory = 0;
+
+}
+
+
+/* =====================================
+   MEMORY RECALL
+===================================== */
+
+function memoryRecall(){
+
+    current =
+        cleanNumber(memory);
+
+    waiting = false;
+
+    update();
+
+}
+
+
+/* =====================================
+   MEMORY ADD
+===================================== */
+
+function memoryAdd(){
+
+    const value =
+        Number(current);
+
+
+    if(
+        Number.isFinite(value)
+    ){
+
+        memory += value;
+
+    }
+
+}
+
+
+/* =====================================
+   MEMORY SUBTRACT
+===================================== */
+
+function memorySubtract(){
+
+    const value =
+        Number(current);
+
+
+    if(
+        Number.isFinite(value)
+    ){
+
+        memory -= value;
+
+    }
+
+}
+
+
+/* =====================================
+   MEMORY STORE
+===================================== */
+
+function memoryStore(){
+
+    const value =
+        Number(current);
+
+
+    if(
+        Number.isFinite(value)
+    ){
+
+        memory = value;
+
+    }
+
+}
+
+
+/* =====================================
+   CLEAN NUMBER
+===================================== */
+
+function cleanNumber(number){
+
+    if(
+        !Number.isFinite(number)
+    ){
+
+        return "Error";
+
+    }
+
+
+    return String(
+        Number(
+            number.toPrecision(12)
+        )
+    );
+
+}
+
+
+/* =====================================
+   FORMAT NUMBER
+===================================== */
+
+function formatNumber(number){
+
+    const value =
+        Number(number);
+
+
+    if(
+        !Number.isFinite(value)
+    ){
+
+        return "Error";
+
+    }
+
+
+    return value.toLocaleString(
+        "en-US",
+        {
+            maximumFractionDigits:10
+        }
+    );
+
+}
+
+
+/* =====================================
+   OPERATOR SYMBOL
+===================================== */
+
+function operatorSymbol(op){
+
+    switch(op){
+
+        case "+":
+
+            return "+";
+
+
+        case "-":
+
+            return "−";
+
+
+        case "*":
+
+            return "×";
+
+
+        case "/":
+
+            return "÷";
+
+
+        default:
+
+            return op;
+
+    }
+
+}
+
+
+/* =====================================
+   SAVE GENERAL HISTORY
+===================================== */
+
+function saveGeneralHistory(
+    expression,
+    result
+){
+
+    /*
+     * Master History ব্যবহার করার চেষ্টা
+     */
+
+    if(
+        typeof CalcProEngine !==
+        "undefined" &&
+        CalcProEngine &&
+        typeof CalcProEngine.saveHistory ===
+        "function"
+    ){
+
+        CalcProEngine.saveHistory(
+            expression,
+            result,
+            "General"
+        );
+
+        renderHistory();
+
+        return;
+
+    }
+
+
+    /*
+     * Fallback:
+     * history.js থাকলে সেটিও ব্যবহার হবে
+     */
+
+    if(
+        typeof saveCalculation ===
+        "function"
+    ){
+
+        saveCalculation(
+            expression,
+            result,
+            "General"
+        );
+
+        renderHistory();
+
+        return;
+
+    }
+
+}
+
+
+/* =====================================
+   GET MASTER HISTORY
+===================================== */
+
+function getGeneralHistory(){
+
+    if(
+        typeof CalcProEngine !==
+        "undefined" &&
+        CalcProEngine &&
+        typeof CalcProEngine.getHistory ===
+        "function"
+    ){
+
+        return CalcProEngine
+            .getHistory()
+            .filter(
+                item =>
+                    item.mode === "General"
+            );
+
+    }
+
+
+    return [];
+
+}
+
+
+/* =====================================
+   RENDER HISTORY
+===================================== */
+
+function renderHistory(){
+
+    const list =
+        document.getElementById(
+            "historyList"
+        );
+
+
+    const data =
+        getGeneralHistory();
+
+
+    if(
+        !data ||
+        data.length === 0
+    ){
+
+        list.innerHTML =
+
+        `
+        <div class="empty">
+            No calculations yet
+        </div>
+        `;
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        data
+        .map(
+            item =>
+
+            `
+
+            <div class="history-item">
+
+                <div class="history-expression">
+
+                    ${escapeHTML(
+                        item.expression
+                    )}
+
+                </div>
+
+
+                <div class="history-result">
+
+                    = ${escapeHTML(
+                        item.result
+                    )}
+
+                </div>
+
+
+                <div class="history-mode">
+
+                    General •
+                    ${formatHistoryTime(
+                        item.time
+                    )}
+
+                </div>
+
+            </div>
+
+            `
+
+        )
+        .join("");
+
+}
+
+
+/* =====================================
+   CLEAR HISTORY
+===================================== */
+
+function clearHistory(){
+
+    if(
+        typeof CalcProEngine !==
+        "undefined" &&
+        CalcProEngine &&
+        typeof CalcProEngine.getHistory ===
+        "function"
+    ){
+
+        const allHistory =
+            CalcProEngine.getHistory();
+
+
+        const remaining =
+            allHistory.filter(
+                item =>
+                    item.mode !== "General"
+            );
+
+
+        localStorage.setItem(
+            "calcpro_history",
+            JSON.stringify(
+                remaining
+            )
+        );
+
+
+        renderHistory();
+
+        return;
+
+    }
+
+
+    /*
+     * Fallback
+     */
+
+    if(
+        typeof clearCalculationHistory ===
+        "function"
+    ){
+
+        clearCalculationHistory();
+
+    }
+
+
+    renderHistory();
+
+}
+
+
+/* =====================================
+   HISTORY TIME
+===================================== */
+
+function formatHistoryTime(time){
+
+    if(!time){
+        return "";
+    }
+
+
+    const date =
+        new Date(time);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "";
+
+    }
+
+
+    return date.toLocaleString();
+
+}
+
+
+/* =====================================
+   ESCAPE HTML
+===================================== */
+
+function escapeHTML(text){
+
+    return String(text)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================
+   KEYBOARD
+===================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        const key =
+            event.key;
+
+
+        if(
+            key >= "0" &&
+            key <= "9"
+        ){
+
+            inputNumber(key);
+
+            return;
+
+        }
+
+
+        if(key === "."){
+
+            inputDecimal();
+
+            return;
+
+        }
+
+
+        if(
+            ["+","-","*","/"]
+            .includes(key)
+        ){
+
+            inputOperator(key);
+
+            return;
+
+        }
+
+
+        if(key === "%"){
+
+            inputPercent();
+
+            return;
+
+        }
+
+
+        if(
+            key === "Enter" ||
+            key === "="
+        ){
+
+            event.preventDefault();
+
+            calculate();
+
+            return;
+
+        }
+
+
+        if(key === "Backspace"){
+
+            deleteLast();
+
+            return;
+
+        }
+
+
+        if(key === "Escape"){
+
+            clearAll();
+
+            return;
+
+        }
+
+    }
+);
+
+
+/* =====================================
+   RIPPLE ANIMATION
+===================================== */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const button =
+            event.target.closest(
+                "button"
+            );
+
+
+        if(!button){
+            return;
+        }
+
+
+        const ripple =
+            document.createElement(
+                "span"
+            );
+
+
+        ripple.className =
+            "ripple";
+
+
+        const rect =
+            button.getBoundingClientRect();
+
+
+        const size =
+            Math.max(
+                rect.width,
+                rect.height
+            );
+
+
+        ripple.style.width =
+            size + "px";
+
+
+        ripple.style.height =
+            size + "px";
+
+
+        ripple.style.left =
+            (
+                event.clientX -
+                rect.left -
+                size / 2
+            ) + "px";
+
+
+        ripple.style.top =
+            (
+                event.clientY -
+                rect.top -
+                size / 2
+            ) + "px";
+
+
+        button.appendChild(
+            ripple
+        );
+
+
+        setTimeout(
+            function(){
+
+                ripple.remove();
+
+            },
+            600
+        );
+
+    }
+);
+
+
+/* =====================================
+   START APPLICATION
+===================================== */
+
+renderHistory();
+
+update();
+
+</script>
+
+</body>
+
+</html>

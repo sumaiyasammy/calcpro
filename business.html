@@ -1,0 +1,2921 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta name="theme-color"
+content="#071018">
+
+<title>CalcPro - Business Calculator</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#05090e;
+    color:#fff;
+    font-family:Arial,sans-serif;
+}
+
+.app{
+    min-height:100vh;
+    background:#080f17;
+    display:flex;
+    flex-direction:column;
+}
+
+/* HEADER */
+
+.header{
+    height:70px;
+    padding:0 14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:#091019;
+    border-bottom:1px solid #223040;
+
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-icon{
+    width:44px;
+    height:44px;
+
+    border-radius:13px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00c9e8,
+        #5367ff
+    );
+
+    font-size:21px;
+    font-weight:900;
+}
+
+.logo-text{
+    font-size:21px;
+    font-weight:900;
+}
+
+.logo-text span{
+    color:#00d4ed;
+}
+
+.back{
+    width:44px;
+    height:44px;
+
+    border:1px solid #29394a;
+
+    border-radius:13px;
+
+    background:#111b26;
+
+    color:white;
+
+    font-size:28px;
+
+    position:relative;
+    overflow:hidden;
+}
+
+/* MAIN */
+
+.main{
+    width:100%;
+    max-width:720px;
+
+    margin:auto;
+
+    padding:10px;
+
+    flex:1;
+}
+
+/* TITLE */
+
+.title{
+    padding:4px 3px 12px;
+}
+
+.title h1{
+    font-size:23px;
+}
+
+.title p{
+    margin-top:5px;
+
+    color:#718095;
+
+    font-size:11px;
+}
+
+/* TOOLS */
+
+.tools{
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:7px;
+
+    margin-bottom:10px;
+}
+
+.tool{
+    min-height:78px;
+
+    padding:9px;
+
+    border-radius:15px;
+
+    border:1px solid #263747;
+
+    background:#0e1721;
+
+    color:#fff;
+
+    text-align:left;
+
+    position:relative;
+    overflow:hidden;
+
+    transition:.15s;
+}
+
+.tool:active{
+    transform:scale(.95);
+}
+
+.tool.active{
+    background:#10222e;
+    border-color:#00c9e8;
+}
+
+.tool-icon{
+    font-size:19px;
+}
+
+.tool-name{
+    margin-top:5px;
+
+    font-size:11px;
+    font-weight:bold;
+}
+
+.tool-desc{
+    margin-top:3px;
+
+    color:#66758a;
+
+    font-size:8px;
+}
+
+/* PANEL */
+
+.panel{
+    display:none;
+
+    padding:14px;
+
+    margin-bottom:10px;
+
+    border-radius:21px;
+
+    background:#0b131c;
+
+    border:1px solid #223142;
+}
+
+.panel.active{
+    display:block;
+}
+
+.panel-title{
+    font-size:17px;
+    font-weight:bold;
+
+    margin-bottom:5px;
+}
+
+.panel-subtitle{
+    color:#718095;
+
+    font-size:10px;
+
+    margin-bottom:12px;
+}
+
+/* INPUT */
+
+.input-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:8px;
+}
+
+.input-group{
+    margin-bottom:9px;
+}
+
+.input-group label{
+    display:block;
+
+    color:#8a98aa;
+
+    font-size:10px;
+
+    margin-bottom:5px;
+}
+
+input,
+select{
+    width:100%;
+
+    height:52px;
+
+    padding:0 13px;
+
+    border-radius:13px;
+
+    border:1px solid #2a394b;
+
+    background:#080e15;
+
+    color:#fff;
+
+    outline:none;
+
+    font-size:17px;
+}
+
+input:focus,
+select:focus{
+    border-color:#00c9e8;
+}
+
+/* ACTION */
+
+.action{
+    width:100%;
+
+    height:55px;
+
+    margin-top:4px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00b9da,
+        #5965ff
+    );
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.action:active{
+    transform:scale(.97);
+}
+
+/* RESULT */
+
+.result{
+    display:none;
+
+    margin-top:11px;
+
+    padding:14px;
+
+    border-radius:17px;
+
+    background:#080f16;
+
+    border:1px solid #29394b;
+}
+
+.result.show{
+    display:block;
+}
+
+.result-label{
+    color:#00d4ed;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    margin-bottom:6px;
+}
+
+.result-main{
+    font-size:27px;
+
+    font-weight:bold;
+
+    line-height:1.35;
+
+    word-break:break-word;
+}
+
+.result-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:7px;
+
+    margin-top:10px;
+}
+
+.result-card{
+    padding:10px;
+
+    border-radius:12px;
+
+    background:#101a25;
+
+    border:1px solid #202e3e;
+}
+
+.result-card small{
+    display:block;
+
+    color:#718095;
+
+    font-size:9px;
+
+    margin-bottom:4px;
+}
+
+.result-card strong{
+    font-size:16px;
+}
+
+/* STEPS */
+
+.steps{
+    margin-top:11px;
+}
+
+.step{
+    display:flex;
+
+    gap:9px;
+
+    padding:10px 0;
+
+    border-bottom:1px solid #1d2936;
+
+    color:#d8dee6;
+
+    font-size:11px;
+
+    line-height:1.5;
+}
+
+.step-num{
+    min-width:25px;
+    height:25px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:8px;
+
+    background:#142633;
+
+    color:#00d4ed;
+
+    font-weight:bold;
+}
+
+/* HISTORY */
+
+.history{
+    padding:13px;
+
+    border-radius:18px;
+
+    background:#0d151f;
+
+    border:1px solid #223142;
+}
+
+.history-head{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:7px;
+}
+
+.history-head h2{
+    font-size:16px;
+}
+
+.clear{
+    border:0;
+
+    background:none;
+
+    color:#00d4ed;
+
+    font-size:11px;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.history-item{
+    padding:9px 2px;
+
+    border-bottom:1px solid #1c2835;
+
+    font-size:11px;
+}
+
+.history-type{
+    color:#00d4ed;
+
+    font-size:9px;
+
+    font-weight:bold;
+
+    margin-bottom:3px;
+}
+
+.history-result{
+    color:#fff;
+
+    line-height:1.5;
+}
+
+.empty{
+    padding:13px;
+
+    text-align:center;
+
+    color:#637184;
+
+    font-size:11px;
+}
+
+/* RIPPLE */
+
+.ripple{
+    position:absolute;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,.23);
+
+    transform:scale(0);
+
+    pointer-events:none;
+
+    animation:ripple .55s linear;
+}
+
+@keyframes ripple{
+
+    to{
+        transform:scale(4);
+        opacity:0;
+    }
+
+}
+
+/* FOOTER */
+
+.footer{
+    padding:16px;
+
+    text-align:center;
+
+    color:#4f5d6f;
+
+    font-size:10px;
+}
+
+@media(max-width:390px){
+
+    .main{
+        padding:7px;
+    }
+
+    .tools{
+        gap:5px;
+    }
+
+    .tool{
+        min-height:72px;
+    }
+
+    input,
+    select{
+        height:49px;
+        font-size:16px;
+    }
+
+}
+
+@media(max-width:340px){
+
+    .tools{
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<header class="header">
+
+<div class="logo">
+
+<div class="logo-icon">
+৳
+</div>
+
+<div class="logo-text">
+Calc<span>Pro</span>
+</div>
+
+</div>
+
+<button
+class="back"
+onclick="history.back()">
+
+‹
+
+</button>
+
+</header>
+
+
+<main class="main">
+
+
+<div class="title">
+
+<h1>💼 Business Calculator</h1>
+
+<p>
+ব্যবসার দৈনন্দিন হিসাব সহজে করুন
+</p>
+
+</div>
+
+
+<!-- TOOLS -->
+
+<div class="tools">
+
+
+<button
+class="tool active"
+onclick="showTool('profit',this)">
+
+<div class="tool-icon">💰</div>
+
+<div class="tool-name">
+Profit / Loss
+</div>
+
+<div class="tool-desc">
+লাভ ও ক্ষতি
+</div>
+
+</button>
+
+
+<button
+class="tool"
+onclick="showTool('discount',this)">
+
+<div class="tool-icon">🏷️</div>
+
+<div class="tool-name">
+Discount
+</div>
+
+<div class="tool-desc">
+ছাড়ের হিসাব
+</div>
+
+</button>
+
+
+<button
+class="tool"
+onclick="showTool('vat',this)">
+
+<div class="tool-icon">🧾</div>
+
+<div class="tool-name">
+VAT
+</div>
+
+<div class="tool-desc">
+VAT হিসাব
+</div>
+
+</button>
+
+
+<button
+class="tool"
+onclick="showTool('markup',this)">
+
+<div class="tool-icon">📈</div>
+
+<div class="tool-name">
+Markup
+</div>
+
+<div class="tool-desc">
+Markup হিসাব
+</div>
+
+</button>
+
+
+<button
+class="tool"
+onclick="showTool('margin',this)">
+
+<div class="tool-icon">📊</div>
+
+<div class="tool-name">
+Profit Margin
+</div>
+
+<div class="tool-desc">
+লাভের শতাংশ
+</div>
+
+</button>
+
+
+<button
+class="tool"
+onclick="showTool('salary',this)">
+
+<div class="tool-icon">👨‍💼</div>
+
+<div class="tool-name">
+Salary
+</div>
+
+<div class="tool-desc">
+বেতন হিসাব
+</div>
+
+</button>
+
+
+<button
+class="tool"
+onclick="showTool('roi',this)">
+
+<div class="tool-icon">💹</div>
+
+<div class="tool-name">
+ROI
+</div>
+
+<div class="tool-desc">
+Investment Return
+</div>
+
+</button>
+
+
+<button
+class="tool"
+onclick="showTool('sales',this)">
+
+<div class="tool-icon">🛒</div>
+
+<div class="tool-name">
+Sales
+</div>
+
+<div class="tool-desc">
+বিক্রয় হিসাব
+</div>
+
+</button>
+
+
+<button
+class="tool"
+onclick="showTool('unit',this)">
+
+<div class="tool-icon">📦</div>
+
+<div class="tool-name">
+Unit Price
+</div>
+
+<div class="tool-desc">
+প্রতি ইউনিট দাম
+</div>
+
+</button>
+
+
+</div>
+
+
+<!-- PROFIT -->
+
+<section
+id="profit"
+class="panel active">
+
+<div class="panel-title">
+💰 Profit / Loss
+</div>
+
+<div class="panel-subtitle">
+ক্রয়মূল্য ও বিক্রয়মূল্য দিয়ে লাভ বা ক্ষতি বের করুন
+</div>
+
+<div class="input-grid">
+
+<div class="input-group">
+
+<label>
+Cost Price / ক্রয়মূল্য
+</label>
+
+<input
+id="cost"
+type="number"
+placeholder="1000">
+
+</div>
+
+<div class="input-group">
+
+<label>
+Selling Price / বিক্রয়মূল্য
+</label>
+
+<input
+id="selling"
+type="number"
+placeholder="1200">
+
+</div>
+
+</div>
+
+<button
+class="action"
+onclick="calculateProfit()">
+
+Calculate Profit / Loss
+
+</button>
+
+<div
+id="profitResult"
+class="result">
+
+<div class="result-label">
+RESULT
+</div>
+
+<div
+id="profitMain"
+class="result-main">
+</div>
+
+<div
+id="profitCards"
+class="result-grid">
+</div>
+
+<div
+id="profitSteps"
+class="steps">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DISCOUNT -->
+
+<section
+id="discount"
+class="panel">
+
+<div class="panel-title">
+🏷️ Discount Calculator
+</div>
+
+<div class="panel-subtitle">
+পণ্যের দাম ও ছাড়ের শতাংশ দিয়ে final price বের করুন
+</div>
+
+<div class="input-grid">
+
+<div class="input-group">
+
+<label>
+Original Price
+</label>
+
+<input
+id="discountPrice"
+type="number"
+placeholder="2000">
+
+</div>
+
+<div class="input-group">
+
+<label>
+Discount %
+</label>
+
+<input
+id="discountRate"
+type="number"
+placeholder="15">
+
+</div>
+
+</div>
+
+<button
+class="action"
+onclick="calculateDiscount()">
+
+Calculate Discount
+
+</button>
+
+<div
+id="discountResult"
+class="result">
+
+<div class="result-label">
+FINAL PRICE
+</div>
+
+<div
+id="discountMain"
+class="result-main">
+</div>
+
+<div
+id="discountCards"
+class="result-grid">
+</div>
+
+<div
+id="discountSteps"
+class="steps">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- VAT -->
+
+<section
+id="vat"
+class="panel">
+
+<div class="panel-title">
+🧾 VAT Calculator
+</div>
+
+<div class="panel-subtitle">
+দামের সাথে VAT যোগ অথবা বাদ দিন
+</div>
+
+<div class="input-grid">
+
+<div class="input-group">
+
+<label>
+Price
+</label>
+
+<input
+id="vatPrice"
+type="number"
+placeholder="1000">
+
+</div>
+
+<div class="input-group">
+
+<label>
+VAT %
+</label>
+
+<input
+id="vatRate"
+type="number"
+placeholder="15">
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>
+Calculation Type
+</label>
+
+<select id="vatType">
+
+<option value="add">
+Price + VAT
+</option>
+
+<option value="remove">
+VAT included price থেকে VAT বাদ
+</option>
+
+</select>
+
+</div>
+
+<button
+class="action"
+onclick="calculateVAT()">
+
+Calculate VAT
+
+</button>
+
+<div
+id="vatResult"
+class="result">
+
+<div class="result-label">
+VAT RESULT
+</div>
+
+<div
+id="vatMain"
+class="result-main">
+</div>
+
+<div
+id="vatCards"
+class="result-grid">
+</div>
+
+<div
+id="vatSteps"
+class="steps">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MARKUP -->
+
+<section
+id="markup"
+class="panel">
+
+<div class="panel-title">
+📈 Markup Calculator
+</div>
+
+<div class="panel-subtitle">
+Cost price-এর উপর markup দিয়ে selling price বের করুন
+</div>
+
+<div class="input-grid">
+
+<div class="input-group">
+
+<label>
+Cost Price
+</label>
+
+<input
+id="markupCost"
+type="number"
+placeholder="1000">
+
+</div>
+
+<div class="input-group">
+
+<label>
+Markup %
+</label>
+
+<input
+id="markupRate"
+type="number"
+placeholder="25">
+
+</div>
+
+</div>
+
+<button
+class="action"
+onclick="calculateMarkup()">
+
+Calculate Selling Price
+
+</button>
+
+<div
+id="markupResult"
+class="result">
+
+<div class="result-label">
+SELLING PRICE
+</div>
+
+<div
+id="markupMain"
+class="result-main">
+</div>
+
+<div
+id="markupCards"
+class="result-grid">
+</div>
+
+<div
+id="markupSteps"
+class="steps">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MARGIN -->
+
+<section
+id="margin"
+class="panel">
+
+<div class="panel-title">
+📊 Profit Margin
+</div>
+
+<div class="panel-subtitle">
+Selling price-এর কত শতাংশ লাভ তা বের করুন
+</div>
+
+<div class="input-grid">
+
+<div class="input-group">
+
+<label>
+Cost Price
+</label>
+
+<input
+id="marginCost"
+type="number"
+placeholder="800">
+
+</div>
+
+<div class="input-group">
+
+<label>
+Selling Price
+</label>
+
+<input
+id="marginSelling"
+type="number"
+placeholder="1000">
+
+</div>
+
+</div>
+
+<button
+class="action"
+onclick="calculateMargin()">
+
+Calculate Margin
+
+</button>
+
+<div
+id="marginResult"
+class="result">
+
+<div class="result-label">
+PROFIT MARGIN
+</div>
+
+<div
+id="marginMain"
+class="result-main">
+</div>
+
+<div
+id="marginCards"
+class="result-grid">
+</div>
+
+<div
+id="marginSteps"
+class="steps">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SALARY -->
+
+<section
+id="salary"
+class="panel">
+
+<div class="panel-title">
+👨‍💼 Salary Calculator
+</div>
+
+<div class="panel-subtitle">
+কর্মচারীর বেতন ও কাজের দিনের হিসাব
+</div>
+
+<div class="input-grid">
+
+<div class="input-group">
+
+<label>
+Monthly Salary
+</label>
+
+<input
+id="salaryMonthly"
+type="number"
+placeholder="15000">
+
+</div>
+
+<div class="input-group">
+
+<label>
+Working Days
+</label>
+
+<input
+id="salaryDays"
+type="number"
+placeholder="26">
+
+</div>
+
+<div class="input-group">
+
+<label>
+Worked Days
+</label>
+
+<input
+id="salaryWorked"
+type="number"
+placeholder="24">
+
+</div>
+
+<div class="input-group">
+
+<label>
+Bonus
+</label>
+
+<input
+id="salaryBonus"
+type="number"
+placeholder="1000">
+
+</div>
+
+</div>
+
+<button
+class="action"
+onclick="calculateSalary()">
+
+Calculate Salary
+
+</button>
+
+<div
+id="salaryResult"
+class="result">
+
+<div class="result-label">
+PAYABLE SALARY
+</div>
+
+<div
+id="salaryMain"
+class="result-main">
+</div>
+
+<div
+id="salaryCards"
+class="result-grid">
+</div>
+
+<div
+id="salarySteps"
+class="steps">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ROI -->
+
+<section
+id="roi"
+class="panel">
+
+<div class="panel-title">
+💹 ROI Calculator
+</div>
+
+<div class="panel-subtitle">
+Investment থেকে কত return হয়েছে তা বের করুন
+</div>
+
+<div class="input-grid">
+
+<div class="input-group">
+
+<label>
+Investment
+</label>
+
+<input
+id="roiInvestment"
+type="number"
+placeholder="10000">
+
+</div>
+
+<div class="input-group">
+
+<label>
+Return
+</label>
+
+<input
+id="roiReturn"
+type="number"
+placeholder="12500">
+
+</div>
+
+</div>
+
+<button
+class="action"
+onclick="calculateROI()">
+
+Calculate ROI
+
+</button>
+
+<div
+id="roiResult"
+class="result">
+
+<div class="result-label">
+ROI
+</div>
+
+<div
+id="roiMain"
+class="result-main">
+</div>
+
+<div
+id="roiCards"
+class="result-grid">
+</div>
+
+<div
+id="roiSteps"
+class="steps">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SALES -->
+
+<section
+id="sales"
+class="panel">
+
+<div class="panel-title">
+🛒 Sales Calculator
+</div>
+
+<div class="panel-subtitle">
+Quantity ও unit price দিয়ে মোট বিক্রয়মূল্য
+</div>
+
+<div class="input-grid">
+
+<div class="input-group">
+
+<label>
+Quantity
+</label>
+
+<input
+id="salesQuantity"
+type="number"
+placeholder="10">
+
+</div>
+
+<div class="input-group">
+
+<label>
+Unit Price
+</label>
+
+<input
+id="salesUnit"
+type="number"
+placeholder="250">
+
+</div>
+
+<div class="input-group">
+
+<label>
+Extra Charge
+</label>
+
+<input
+id="salesExtra"
+type="number"
+placeholder="50">
+
+</div>
+
+<div class="input-group">
+
+<label>
+Tax / VAT %
+</label>
+
+<input
+id="salesTax"
+type="number"
+placeholder="0">
+
+</div>
+
+</div>
+
+<button
+class="action"
+onclick="calculateSales()">
+
+Calculate Total Sales
+
+</button>
+
+<div
+id="salesResult"
+class="result">
+
+<div class="result-label">
+TOTAL SALES
+</div>
+
+<div
+id="salesMain"
+class="result-main">
+</div>
+
+<div
+id="salesCards"
+class="result-grid">
+</div>
+
+<div
+id="salesSteps"
+class="steps">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- UNIT -->
+
+<section
+id="unit"
+class="panel">
+
+<div class="panel-title">
+📦 Unit Price
+</div>
+
+<div class="panel-subtitle">
+মোট দাম ও quantity থেকে প্রতি ইউনিটের দাম
+</div>
+
+<div class="input-grid">
+
+<div class="input-group">
+
+<label>
+Total Cost
+</label>
+
+<input
+id="unitTotal"
+type="number"
+placeholder="5000">
+
+</div>
+
+<div class="input-group">
+
+<label>
+Quantity
+</label>
+
+<input
+id="unitQuantity"
+type="number"
+placeholder="20">
+
+</div>
+
+</div>
+
+<button
+class="action"
+onclick="calculateUnit()">
+
+Calculate Unit Price
+
+</button>
+
+<div
+id="unitResult"
+class="result">
+
+<div class="result-label">
+UNIT PRICE
+</div>
+
+<div
+id="unitMain"
+class="result-main">
+</div>
+
+<div
+id="unitCards"
+class="result-grid">
+</div>
+
+<div
+id="unitSteps"
+class="steps">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- HISTORY -->
+
+<section class="history">
+
+<div class="history-head">
+
+<h2>
+🕘 Business History
+</h2>
+
+<button
+class="clear"
+onclick="clearHistory()">
+
+Clear
+
+</button>
+
+</div>
+
+<div id="historyList">
+
+<div class="empty">
+No calculations yet
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<footer class="footer">
+
+CalcPro • Business Calculator
+
+</footer>
+
+</div>
+
+
+<script>
+
+/* =========================
+TOOL SWITCH
+========================= */
+
+function showTool(id,button){
+
+    document
+    .querySelectorAll(".panel")
+    .forEach(
+        p =>
+        p.classList.remove("active")
+    );
+
+    document
+    .querySelectorAll(".tool")
+    .forEach(
+        b =>
+        b.classList.remove("active")
+    );
+
+    document
+    .getElementById(id)
+    .classList.add("active");
+
+    button.classList.add("active");
+
+}
+
+
+/* =========================
+FORMAT
+========================= */
+
+function fmt(n){
+
+    if(!Number.isFinite(n)){
+        return "—";
+    }
+
+    return Number(
+        n.toFixed(2)
+    ).toLocaleString(
+        "en-US"
+    );
+
+}
+
+
+/* =========================
+STEP
+========================= */
+
+function step(n,title,value=""){
+
+    return `
+
+    <div class="step">
+
+        <div class="step-num">
+        ${n}
+        </div>
+
+        <div>
+
+        <b>${escapeHTML(title)}</b>
+
+        ${
+            value
+            ?
+            `<br>${escapeHTML(value)}`
+            :
+            ""
+        }
+
+        </div>
+
+    </div>
+
+    `;
+
+}
+
+
+/* =========================
+ESCAPE
+========================= */
+
+function escapeHTML(text){
+
+    return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+PROFIT / LOSS
+========================= */
+
+function calculateProfit(){
+
+    const cost =
+    Number(
+        document
+        .getElementById("cost")
+        .value
+    );
+
+    const selling =
+    Number(
+        document
+        .getElementById("selling")
+        .value
+    );
+
+    if(
+        !Number.isFinite(cost) ||
+        !Number.isFinite(selling) ||
+        cost < 0 ||
+        selling < 0
+    ){
+
+        alert("সঠিক Cost Price ও Selling Price দিন।");
+        return;
+
+    }
+
+    const difference =
+    selling - cost;
+
+    const percent =
+    cost === 0
+    ? 0
+    : Math.abs(difference)
+    / cost * 100;
+
+    const profit =
+    difference >= 0;
+
+    document
+    .getElementById("profitMain")
+    .textContent =
+    profit
+    ? `লাভ ৳${fmt(difference)}`
+    : `ক্ষতি ৳${fmt(Math.abs(difference))}`;
+
+    document
+    .getElementById("profitCards")
+    .innerHTML = `
+
+    <div class="result-card">
+
+        <small>Cost Price</small>
+
+        <strong>
+        ৳${fmt(cost)}
+        </strong>
+
+    </div>
+
+    <div class="result-card">
+
+        <small>Selling Price</small>
+
+        <strong>
+        ৳${fmt(selling)}
+        </strong>
+
+    </div>
+
+    <div class="result-card">
+
+        <small>
+        ${profit ? "Profit" : "Loss"} %
+        </small>
+
+        <strong>
+        ${fmt(percent)}%
+        </strong>
+
+    </div>
+
+    `;
+
+    document
+    .getElementById("profitSteps")
+    .innerHTML = `
+
+    ${step(
+        1,
+        "Cost Price:",
+        `৳${fmt(cost)}`
+    )}
+
+    ${step(
+        2,
+        "Selling Price:",
+        `৳${fmt(selling)}`
+    )}
+
+    ${step(
+        3,
+        "Difference:",
+        `৳${fmt(selling)} − ৳${fmt(cost)} = ৳${fmt(difference)}`
+    )}
+
+    ${step(
+        4,
+        "Percentage:",
+        `(${fmt(Math.abs(difference))} ÷ ${fmt(cost)}) × 100 = ${fmt(percent)}%`
+    )}
+
+    ${step(
+        5,
+        "Final:",
+        profit
+        ? `লাভ ৳${fmt(difference)}`
+        : `ক্ষতি ৳${fmt(Math.abs(difference))}`
+    )}
+
+    `;
+
+    show("profitResult");
+
+    addHistory(
+        "Profit / Loss",
+        profit
+        ? `Profit = ৳${fmt(difference)}`
+        : `Loss = ৳${fmt(Math.abs(difference))}`
+    );
+
+}
+
+
+/* =========================
+DISCOUNT
+========================= */
+
+function calculateDiscount(){
+
+    const price =
+    Number(
+        document
+        .getElementById("discountPrice")
+        .value
+    );
+
+    const rate =
+    Number(
+        document
+        .getElementById("discountRate")
+        .value
+    );
+
+    if(
+        !Number.isFinite(price) ||
+        !Number.isFinite(rate) ||
+        price < 0 ||
+        rate < 0
+    ){
+
+        alert("সঠিক দাম ও Discount দিন।");
+        return;
+
+    }
+
+    const discount =
+    price * rate / 100;
+
+    const finalPrice =
+    price - discount;
+
+    document
+    .getElementById("discountMain")
+    .textContent =
+    `৳${fmt(finalPrice)}`;
+
+    document
+    .getElementById("discountCards")
+    .innerHTML = `
+
+    <div class="result-card">
+        <small>Original</small>
+        <strong>৳${fmt(price)}</strong>
+    </div>
+
+    <div class="result-card">
+        <small>Discount</small>
+        <strong>৳${fmt(discount)}</strong>
+    </div>
+
+    `;
+
+    document
+    .getElementById("discountSteps")
+    .innerHTML = `
+
+    ${step(
+        1,
+        "Original Price:",
+        `৳${fmt(price)}`
+    )}
+
+    ${step(
+        2,
+        "Discount:",
+        `${fmt(price)} × ${fmt(rate)} ÷ 100`
+    )}
+
+    ${step(
+        3,
+        "Discount Amount:",
+        `৳${fmt(discount)}`
+    )}
+
+    ${step(
+        4,
+        "Final Price:",
+        `৳${fmt(price)} − ৳${fmt(discount)} = ৳${fmt(finalPrice)}`
+    )}
+
+    `;
+
+    show("discountResult");
+
+    addHistory(
+        "Discount",
+        `Final Price = ৳${fmt(finalPrice)}`
+    );
+
+}
+
+
+/* =========================
+VAT
+========================= */
+
+function calculateVAT(){
+
+    const price =
+    Number(
+        document
+        .getElementById("vatPrice")
+        .value
+    );
+
+    const rate =
+    Number(
+        document
+        .getElementById("vatRate")
+        .value
+    );
+
+    const type =
+    document
+    .getElementById("vatType")
+    .value;
+
+    if(
+        !Number.isFinite(price) ||
+        !Number.isFinite(rate) ||
+        price < 0 ||
+        rate < 0
+    ){
+
+        alert("সঠিক Price ও VAT দিন।");
+        return;
+
+    }
+
+    let vat;
+    let finalPrice;
+
+    if(type === "add"){
+
+        vat =
+        price * rate / 100;
+
+        finalPrice =
+        price + vat;
+
+    }
+    else{
+
+        finalPrice =
+        price;
+
+        vat =
+        price *
+        rate /
+        (100 + rate);
+
+    }
+
+    document
+    .getElementById("vatMain")
+    .textContent =
+    `VAT = ৳${fmt(vat)}`;
+
+    document
+    .getElementById("vatCards")
+    .innerHTML = `
+
+    <div class="result-card">
+        <small>Base Price</small>
+        <strong>৳${fmt(price)}</strong>
+    </div>
+
+    <div class="result-card">
+        <small>VAT</small>
+        <strong>৳${fmt(vat)}</strong>
+    </div>
+
+    <div class="result-card">
+        <small>Final Price</small>
+        <strong>
+        ৳${fmt(
+            type === "add"
+            ? finalPrice
+            : price
+        )}
+        </strong>
+    </div>
+
+    `;
+
+    document
+    .getElementById("vatSteps")
+    .innerHTML = `
+
+    ${step(
+        1,
+        "Price:",
+        `৳${fmt(price)}`
+    )}
+
+    ${step(
+        2,
+        "VAT Rate:",
+        `${fmt(rate)}%`
+    )}
+
+    ${step(
+        3,
+        "VAT Amount:",
+        type === "add"
+        ? `${fmt(price)} × ${fmt(rate)} ÷ 100 = ৳${fmt(vat)}`
+        : `৳${fmt(vat)}`
+    )}
+
+    ${step(
+        4,
+        "Result:",
+        type === "add"
+        ? `৳${fmt(price)} + ৳${fmt(vat)} = ৳${fmt(finalPrice)}`
+        : `VAT included price = ৳${fmt(price)}`
+    )}
+
+    `;
+
+    show("vatResult");
+
+    addHistory(
+        "VAT",
+        `VAT = ৳${fmt(vat)}`
+    );
+
+}
+
+
+/* =========================
+MARKUP
+========================= */
+
+function calculateMarkup(){
+
+    const cost =
+    Number(
+        document
+        .getElementById("markupCost")
+        .value
+    );
+
+    const rate =
+    Number(
+        document
+        .getElementById("markupRate")
+        .value
+    );
+
+    if(
+        !Number.isFinite(cost) ||
+        !Number.isFinite(rate) ||
+        cost < 0 ||
+        rate < 0
+    ){
+
+        alert("সঠিক Cost ও Markup দিন।");
+        return;
+
+    }
+
+    const markup =
+    cost * rate / 100;
+
+    const selling =
+    cost + markup;
+
+    document
+    .getElementById("markupMain")
+    .textContent =
+    `৳${fmt(selling)}`;
+
+    document
+    .getElementById("markupCards")
+    .innerHTML = `
+
+    <div class="result-card">
+        <small>Cost</small>
+        <strong>৳${fmt(cost)}</strong>
+    </div>
+
+    <div class="result-card">
+        <small>Markup</small>
+        <strong>৳${fmt(markup)}</strong>
+    </div>
+
+    `;
+
+    document
+    .getElementById("markupSteps")
+    .innerHTML = `
+
+    ${step(
+        1,
+        "Cost Price:",
+        `৳${fmt(cost)}`
+    )}
+
+    ${step(
+        2,
+        "Markup Amount:",
+        `${fmt(cost)} × ${fmt(rate)} ÷ 100 = ${fmt(markup)}`
+    )}
+
+    ${step(
+        3,
+        "Selling Price:",
+        `${fmt(cost)} + ${fmt(markup)} = ${fmt(selling)}`
+    )}
+
+    `;
+
+    show("markupResult");
+
+    addHistory(
+        "Markup",
+        `Selling Price = ৳${fmt(selling)}`
+    );
+
+}
+
+
+/* =========================
+MARGIN
+========================= */
+
+function calculateMargin(){
+
+    const cost =
+    Number(
+        document
+        .getElementById("marginCost")
+        .value
+    );
+
+    const selling =
+    Number(
+        document
+        .getElementById("marginSelling")
+        .value
+    );
+
+    if(
+        !Number.isFinite(cost) ||
+        !Number.isFinite(selling) ||
+        selling === 0
+    ){
+
+        alert("সঠিক Cost ও Selling Price দিন।");
+        return;
+
+    }
+
+    const profit =
+    selling - cost;
+
+    const margin =
+    profit / selling * 100;
+
+    document
+    .getElementById("marginMain")
+    .textContent =
+    `${fmt(margin)}%`;
+
+    document
+    .getElementById("marginCards")
+    .innerHTML = `
+
+    <div class="result-card">
+        <small>Profit</small>
+        <strong>৳${fmt(profit)}</strong>
+    </div>
+
+    <div class="result-card">
+        <small>Revenue</small>
+        <strong>৳${fmt(selling)}</strong>
+    </div>
+
+    `;
+
+    document
+    .getElementById("marginSteps")
+    .innerHTML = `
+
+    ${step(
+        1,
+        "Profit:",
+        `৳${fmt(selling)} − ৳${fmt(cost)} = ৳${fmt(profit)}`
+    )}
+
+    ${step(
+        2,
+        "Margin Formula:",
+        "Profit ÷ Selling Price × 100"
+    )}
+
+    ${step(
+        3,
+        "Calculation:",
+        `${fmt(profit)} ÷ ${fmt(selling)} × 100`
+    )}
+
+    ${step(
+        4,
+        "Profit Margin:",
+        `${fmt(margin)}%`
+    )}
+
+    `;
+
+    show("marginResult");
+
+    addHistory(
+        "Profit Margin",
+        `Margin = ${fmt(margin)}%`
+    );
+
+}
+
+
+/* =========================
+SALARY
+========================= */
+
+function calculateSalary(){
+
+    const monthly =
+    Number(
+        document
+        .getElementById("salaryMonthly")
+        .value
+    );
+
+    const days =
+    Number(
+        document
+        .getElementById("salaryDays")
+        .value
+    );
+
+    const worked =
+    Number(
+        document
+        .getElementById("salaryWorked")
+        .value
+    );
+
+    const bonus =
+    Number(
+        document
+        .getElementById("salaryBonus")
+        .value
+    ) || 0;
+
+    if(
+        !Number.isFinite(monthly) ||
+        !Number.isFinite(days) ||
+        !Number.isFinite(worked) ||
+        days <= 0 ||
+        worked < 0
+    ){
+
+        alert("সঠিক Salary ও Days দিন।");
+        return;
+
+    }
+
+    const daily =
+    monthly / days;
+
+    const earned =
+    daily * worked;
+
+    const payable =
+    earned + bonus;
+
+    document
+    .getElementById("salaryMain")
+    .textContent =
+    `৳${fmt(payable)}`;
+
+    document
+    .getElementById("salaryCards")
+    .innerHTML = `
+
+    <div class="result-card">
+        <small>Daily Salary</small>
+        <strong>৳${fmt(daily)}</strong>
+    </div>
+
+    <div class="result-card">
+        <small>Earned Salary</small>
+        <strong>৳${fmt(earned)}</strong>
+    </div>
+
+    <div class="result-card">
+        <small>Bonus</small>
+        <strong>৳${fmt(bonus)}</strong>
+    </div>
+
+    `;
+
+    document
+    .getElementById("salarySteps")
+    .innerHTML = `
+
+    ${step(
+        1,
+        "Daily Salary:",
+        `${fmt(monthly)} ÷ ${fmt(days)} = ৳${fmt(daily)}`
+    )}
+
+    ${step(
+        2,
+        "Worked Salary:",
+        `${fmt(daily)} × ${fmt(worked)} = ৳${fmt(earned)}`
+    )}
+
+    ${step(
+        3,
+        "Bonus:",
+        `৳${fmt(bonus)}`
+    )}
+
+    ${step(
+        4,
+        "Payable Salary:",
+        `৳${fmt(earned)} + ৳${fmt(bonus)} = ৳${fmt(payable)}`
+    )}
+
+    `;
+
+    show("salaryResult");
+
+    addHistory(
+        "Salary",
+        `Payable = ৳${fmt(payable)}`
+    );
+
+}
+
+
+/* =========================
+ROI
+========================= */
+
+function calculateROI(){
+
+    const investment =
+    Number(
+        document
+        .getElementById("roiInvestment")
+        .value
+    );
+
+    const returned =
+    Number(
+        document
+        .getElementById("roiReturn")
+        .value
+    );
+
+    if(
+        !Number.isFinite(investment) ||
+        !Number.isFinite(returned) ||
+        investment <= 0
+    ){
+
+        alert("সঠিক Investment ও Return দিন।");
+        return;
+
+    }
+
+    const gain =
+    returned - investment;
+
+    const roi =
+    gain / investment * 100;
+
+    document
+    .getElementById("roiMain")
+    .textContent =
+    `${fmt(roi)}%`;
+
+    document
+    .getElementById("roiCards")
+    .innerHTML = `
+
+    <div class="result-card">
+        <small>Investment</small>
+        <strong>৳${fmt(investment)}</strong>
+    </div>
+
+    <div class="result-card">
+        <small>Gain / Loss</small>
+        <strong>৳${fmt(gain)}</strong>
+    </div>
+
+    <div class="result-card">
+        <small>Total Return</small>
+        <strong>৳${fmt(returned)}</strong>
+    </div>
+
+    `;
+
+    document
+    .getElementById("roiSteps")
+    .innerHTML = `
+
+    ${step(
+        1,
+        "Investment:",
+        `৳${fmt(investment)}`
+    )}
+
+    ${step(
+        2,
+        "Gain / Loss:",
+        `৳${fmt(returned)} − ৳${fmt(investment)} = ৳${fmt(gain)}`
+    )}
+
+    ${step(
+        3,
+        "ROI Formula:",
+        "Gain ÷ Investment × 100"
+    )}
+
+    ${step(
+        4,
+        "ROI:",
+        `${fmt(roi)}%`
+    )}
+
+    `;
+
+    show("roiResult");
+
+    addHistory(
+        "ROI",
+        `ROI = ${fmt(roi)}%`
+    );
+
+}
+
+
+/* =========================
+SALES
+========================= */
+
+function calculateSales(){
+
+    const quantity =
+    Number(
+        document
+        .getElementById("salesQuantity")
+        .value
+    );
+
+    const unit =
+    Number(
+        document
+        .getElementById("salesUnit")
+        .value
+    );
+
+    const extra =
+    Number(
+        document
+        .getElementById("salesExtra")
+        .value
+    ) || 0;
+
+    const tax =
+    Number(
+        document
+        .getElementById("salesTax")
+        .value
+    ) || 0;
+
+    if(
+        !Number.isFinite(quantity) ||
+        !Number.isFinite(unit) ||
+        quantity < 0 ||
+        unit < 0
+    ){
+
+        alert("Quantity ও Unit Price দিন।");
+        return;
+
+    }
+
+    const subtotal =
+    quantity * unit;
+
+    const taxAmount =
+    subtotal * tax / 100;
+
+    const total =
+    subtotal +
+    extra +
+    taxAmount;
+
+    document
+    .getElementById("salesMain")
+    .textContent =
+    `৳${fmt(total)}`;
+
+    document
+    .getElementById("salesCards")
+    .innerHTML = `
+
+    <div class="result-card">
+        <small>Subtotal</small>
+        <strong>৳${fmt(subtotal)}</strong>
+    </div>
+
+    <div class="result-card">
+        <small>Tax / VAT</small>
+        <strong>৳${fmt(taxAmount)}</strong>
+    </div>
+
+    <div class="result-card">
+        <small>Extra Charge</small>
+        <strong>৳${fmt(extra)}</strong>
+    </div>
+
+    `;
+
+    document
+    .getElementById("salesSteps")
+    .innerHTML = `
+
+    ${step(
+        1,
+        "Product Total:",
+        `${fmt(quantity)} × ৳${fmt(unit)} = ৳${fmt(subtotal)}`
+    )}
+
+    ${step(
+        2,
+        "Tax:",
+        `${fmt(subtotal)} × ${fmt(tax)}% = ৳${fmt(taxAmount)}`
+    )}
+
+    ${step(
+        3,
+        "Extra Charge:",
+        `৳${fmt(extra)}`
+    )}
+
+    ${step(
+        4,
+        "Total Sales:",
+        `৳${fmt(subtotal)} + ৳${fmt(extra)} + ৳${fmt(taxAmount)} = ৳${fmt(total)}`
+    )}
+
+    `;
+
+    show("salesResult");
+
+    addHistory(
+        "Sales",
+        `Total = ৳${fmt(total)}`
+    );
+
+}
+
+
+/* =========================
+UNIT PRICE
+========================= */
+
+function calculateUnit(){
+
+    const total =
+    Number(
+        document
+        .getElementById("unitTotal")
+        .value
+    );
+
+    const quantity =
+    Number(
+        document
+        .getElementById("unitQuantity")
+        .value
+    );
+
+    if(
+        !Number.isFinite(total) ||
+        !Number.isFinite(quantity) ||
+        quantity <= 0
+    ){
+
+        alert("সঠিক Total Cost ও Quantity দিন।");
+        return;
+
+    }
+
+    const unit =
+    total / quantity;
+
+    document
+    .getElementById("unitMain")
+    .textContent =
+    `৳${fmt(unit)} / unit`;
+
+    document
+    .getElementById("unitCards")
+    .innerHTML = `
+
+    <div class="result-card">
+        <small>Total Cost</small>
+        <strong>৳${fmt(total)}</strong>
+    </div>
+
+    <div class="result-card">
+        <small>Quantity</small>
+        <strong>${fmt(quantity)}</strong>
+    </div>
+
+    `;
+
+    document
+    .getElementById("unitSteps")
+    .innerHTML = `
+
+    ${step(
+        1,
+        "Total Cost:",
+        `৳${fmt(total)}`
+    )}
+
+    ${step(
+        2,
+        "Quantity:",
+        fmt(quantity)
+    )}
+
+    ${step(
+        3,
+        "Formula:",
+        "Unit Price = Total Cost ÷ Quantity"
+    )}
+
+    ${step(
+        4,
+        "Unit Price:",
+        `৳${fmt(total)} ÷ ${fmt(quantity)} = ৳${fmt(unit)}`
+    )}
+
+    `;
+
+    show("unitResult");
+
+    addHistory(
+        "Unit Price",
+        `Unit = ৳${fmt(unit)}`
+    );
+
+}
+
+
+/* =========================
+SHOW
+========================= */
+
+function show(id){
+
+    document
+    .getElementById(id)
+    .classList.add("show");
+
+}
+
+
+/* =========================
+HISTORY
+========================= */
+
+function addHistory(type,result){
+
+    let data =
+    JSON.parse(
+        localStorage.getItem(
+            "business_history"
+        ) || "[]"
+    );
+
+    data.unshift({
+
+        type:type,
+
+        result:result
+
+    });
+
+    data =
+    data.slice(0,30);
+
+    localStorage.setItem(
+        "business_history",
+        JSON.stringify(data)
+    );
+
+    renderHistory();
+
+}
+
+
+function renderHistory(){
+
+    const list =
+    document
+    .getElementById(
+        "historyList"
+    );
+
+    const data =
+    JSON.parse(
+        localStorage.getItem(
+            "business_history"
+        ) || "[]"
+    );
+
+    if(data.length === 0){
+
+        list.innerHTML =
+        `
+        <div class="empty">
+        No calculations yet
+        </div>
+        `;
+
+        return;
+
+    }
+
+    list.innerHTML =
+    data.map(
+        item => `
+
+        <div class="history-item">
+
+            <div class="history-type">
+            ${escapeHTML(item.type)}
+            </div>
+
+            <div class="history-result">
+            ${escapeHTML(item.result)}
+            </div>
+
+        </div>
+
+        `
+    ).join("");
+
+}
+
+
+function clearHistory(){
+
+    localStorage.removeItem(
+        "business_history"
+    );
+
+    renderHistory();
+
+}
+
+
+/* =========================
+RIPPLE
+========================= */
+
+document.addEventListener(
+"click",
+function(event){
+
+    const button =
+    event.target.closest(
+        "button"
+    );
+
+    if(!button){
+        return;
+    }
+
+    const ripple =
+    document.createElement(
+        "span"
+    );
+
+    ripple.className =
+    "ripple";
+
+    const rect =
+    button.getBoundingClientRect();
+
+    const size =
+    Math.max(
+        rect.width,
+        rect.height
+    );
+
+    ripple.style.width =
+    size + "px";
+
+    ripple.style.height =
+    size + "px";
+
+    ripple.style.left =
+    (
+        event.clientX -
+        rect.left -
+        size / 2
+    ) + "px";
+
+    ripple.style.top =
+    (
+        event.clientY -
+        rect.top -
+        size / 2
+    ) + "px";
+
+    button.appendChild(
+        ripple
+    );
+
+    setTimeout(
+        () => ripple.remove(),
+        600
+    );
+
+});
+
+
+/* START */
+
+renderHistory();
+
+</script>
+
+</body>
+
+</html>

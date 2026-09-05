@@ -1,0 +1,3121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>CalcPro - Student Math</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#05080d;
+    color:#ffffff;
+    font-family:Arial,sans-serif;
+}
+
+
+/* =========================
+   APP
+========================= */
+
+.app{
+    width:100%;
+    min-height:100vh;
+    background:#080d14;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+
+    height:72px;
+
+    padding:0 18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    background:#090e16;
+
+    border-bottom:1px solid #1d2735;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+}
+
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+}
+
+
+.logo-icon{
+
+    width:44px;
+
+    height:44px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00d9ff,
+        #5366ff
+    );
+
+    font-size:23px;
+
+    font-weight:bold;
+
+}
+
+
+.logo-text{
+
+    font-size:21px;
+
+    font-weight:800;
+
+}
+
+
+.logo-text span{
+
+    color:#00d9ff;
+
+}
+
+
+.back-btn{
+
+    width:43px;
+
+    height:43px;
+
+    border:1px solid #273344;
+
+    border-radius:13px;
+
+    background:#101722;
+
+    color:#ffffff;
+
+    font-size:21px;
+
+    cursor:pointer;
+
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+
+    width:100%;
+
+    padding:15px;
+
+    padding-bottom:45px;
+
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.title{
+
+    padding:7px 2px 17px;
+
+}
+
+
+.title h1{
+
+    font-size:27px;
+
+}
+
+
+.title p{
+
+    margin-top:6px;
+
+    color:#7e8b9e;
+
+    font-size:14px;
+
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+.categories{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:10px;
+
+    margin-bottom:16px;
+
+}
+
+
+.category{
+
+    min-height:65px;
+
+    padding:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    border-radius:15px;
+
+    border:1px solid #202c3b;
+
+    background:#101721;
+
+    color:#ffffff;
+
+    cursor:pointer;
+
+    transition:.18s;
+
+}
+
+
+.category:active{
+
+    transform:scale(.96);
+
+}
+
+
+.category.active{
+
+    border-color:#00c8e8;
+
+    background:#102b37;
+
+}
+
+
+.category-icon{
+
+    font-size:23px;
+
+}
+
+
+.category-text{
+
+    font-size:14px;
+
+    font-weight:bold;
+
+}
+
+
+/* =========================
+   CALCULATOR CARD
+========================= */
+
+.card{
+
+    width:100%;
+
+    padding:17px;
+
+    margin-bottom:14px;
+
+    border-radius:18px;
+
+    border:1px solid #202c3b;
+
+    background:#0e151f;
+
+}
+
+
+.card h2{
+
+    font-size:19px;
+
+    margin-bottom:7px;
+
+}
+
+
+.card-description{
+
+    color:#7c899b;
+
+    font-size:13px;
+
+    line-height:1.5;
+
+    margin-bottom:15px;
+
+}
+
+
+/* =========================
+   FIELDS
+========================= */
+
+.field{
+
+    margin-bottom:13px;
+
+}
+
+
+.field label{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    color:#9daabd;
+
+    font-size:13px;
+
+}
+
+
+.field input,
+.field select{
+
+    width:100%;
+
+    height:53px;
+
+    padding:0 14px;
+
+    border-radius:13px;
+
+    border:1px solid #283547;
+
+    background:#080e15;
+
+    color:#ffffff;
+
+    outline:none;
+
+    font-size:17px;
+
+}
+
+
+.field input:focus,
+.field select:focus{
+
+    border-color:#00cce9;
+
+    box-shadow:
+    0 0 0 3px
+    rgba(0,204,233,.08);
+
+}
+
+
+.grid2{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:11px;
+
+}
+
+
+/* =========================
+   ACTION BUTTON
+========================= */
+
+.action{
+
+    width:100%;
+
+    min-height:54px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00b9dc,
+        #5868ff
+    );
+
+    color:#ffffff;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.15s;
+
+}
+
+
+.action:active{
+
+    transform:scale(.97);
+
+}
+
+
+/* =========================
+   RIPPLE
+========================= */
+
+.ripple{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    transform:scale(0);
+
+    background:
+    rgba(255,255,255,.25);
+
+    pointer-events:none;
+
+    animation:
+    ripple .55s linear;
+
+}
+
+
+@keyframes ripple{
+
+    to{
+
+        transform:scale(4);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* =========================
+   ANSWER
+========================= */
+
+.answer{
+
+    display:none;
+
+    margin-top:14px;
+
+    padding:15px;
+
+    border-radius:14px;
+
+    background:#08131a;
+
+    border:1px solid #194452;
+
+    color:#dffaff;
+
+    font-size:14px;
+
+    line-height:1.8;
+
+}
+
+
+.answer.show{
+
+    display:block;
+
+}
+
+
+.answer-title{
+
+    color:#00d9ff;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+}
+
+
+.step{
+
+    margin:7px 0;
+
+    padding:9px;
+
+    border-left:3px solid #00c9e8;
+
+    background:#0d1922;
+
+    border-radius:7px;
+
+}
+
+
+.final{
+
+    margin-top:10px;
+
+    padding:11px;
+
+    border-radius:10px;
+
+    background:#102e38;
+
+    border:1px solid #1c6677;
+
+    color:#ffffff;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+}
+
+
+/* =========================
+   FORMULA
+========================= */
+
+.formula{
+
+    margin-top:10px;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    background:#101923;
+
+    color:#aebdcc;
+
+    font-family:monospace;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+
+    text-align:center;
+
+    color:#536174;
+
+    font-size:12px;
+
+    padding:20px;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:480px){
+
+    .page{
+
+        padding:9px;
+
+    }
+
+    .grid2{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+}
+
+
+@media(max-width:360px){
+
+    .categories{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .grid2{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+
+<div class="logo">
+
+<div class="logo-icon">
+∑
+</div>
+
+<div class="logo-text">
+Calc<span>Pro</span>
+</div>
+
+</div>
+
+
+<button
+class="back-btn"
+onclick="history.back()">
+
+‹
+
+</button>
+
+</header>
+
+
+
+<!-- =========================
+     PAGE
+========================= -->
+
+<main class="page">
+
+
+<div class="title">
+
+<h1>
+🎓 Student Math
+</h1>
+
+<p>
+Solve mathematics with step-by-step solutions.
+</p>
+
+</div>
+
+
+
+<!-- =========================
+     CATEGORY
+========================= -->
+
+<div class="categories">
+
+
+<button
+class="category active"
+onclick="showTool('fraction',this)">
+
+<span class="category-icon">
+➗
+</span>
+
+<span class="category-text">
+Fraction
+</span>
+
+</button>
+
+
+<button
+class="category"
+onclick="showTool('percentage',this)">
+
+<span class="category-icon">
+📊
+</span>
+
+<span class="category-text">
+Percentage
+</span>
+
+</button>
+
+
+<button
+class="category"
+onclick="showTool('average',this)">
+
+<span class="category-icon">
+📚
+</span>
+
+<span class="category-text">
+Average
+</span>
+
+</button>
+
+
+<button
+class="category"
+onclick="showTool('ratio',this)">
+
+<span class="category-icon">
+⚖️
+</span>
+
+<span class="category-text">
+Ratio
+</span>
+
+</button>
+
+
+<button
+class="category"
+onclick="showTool('linear',this)">
+
+<span class="category-icon">
+✏️
+</span>
+
+<span class="category-text">
+Linear
+</span>
+
+</button>
+
+
+<button
+class="category"
+onclick="showTool('quadratic',this)">
+
+<span class="category-icon">
+🔢
+</span>
+
+<span class="category-text">
+Quadratic
+</span>
+
+</button>
+
+
+<button
+class="category"
+onclick="showTool('gcd',this)">
+
+<span class="category-icon">
+🔗
+</span>
+
+<span class="category-text">
+GCD / LCM
+</span>
+
+</button>
+
+
+<button
+class="category"
+onclick="showTool('geometry',this)">
+
+<span class="category-icon">
+📐
+</span>
+
+<span class="category-text">
+Geometry
+</span>
+
+</button>
+
+
+<button
+class="category"
+onclick="showTool('pythagoras',this)">
+
+<span class="category-icon">
+📏
+</span>
+
+<span class="category-text">
+Pythagoras
+</span>
+
+</button>
+
+
+<button
+class="category"
+onclick="showTool('trigonometry',this)">
+
+<span class="category-icon">
+📐
+</span>
+
+<span class="category-text">
+Trigonometry
+</span>
+
+</button>
+
+
+</div>
+
+
+
+<!-- =========================
+     FRACTION
+========================= -->
+
+<div
+id="fraction"
+class="tool">
+
+<div class="card">
+
+<h2>
+➗ Fraction Calculator
+</h2>
+
+<p class="card-description">
+Add, subtract, multiply or divide fractions.
+</p>
+
+
+<div class="grid2">
+
+<div class="field">
+
+<label>
+First Numerator
+</label>
+
+<input
+id="f1n"
+type="number"
+placeholder="1">
+
+</div>
+
+
+<div class="field">
+
+<label>
+First Denominator
+</label>
+
+<input
+id="f1d"
+type="number"
+placeholder="2">
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Operation
+</label>
+
+<select id="fractionOp">
+
+<option value="+">
+Add (+)
+</option>
+
+<option value="-">
+Subtract (−)
+</option>
+
+<option value="*">
+Multiply (×)
+</option>
+
+<option value="/">
+Divide (÷)
+</option>
+
+</select>
+
+</div>
+
+
+<div class="grid2">
+
+<div class="field">
+
+<label>
+Second Numerator
+</label>
+
+<input
+id="f2n"
+type="number"
+placeholder="1">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Second Denominator
+</label>
+
+<input
+id="f2d"
+type="number"
+placeholder="3">
+
+</div>
+
+</div>
+
+
+<button
+class="action"
+onclick="fractionCalc()">
+
+Solve Fraction
+
+</button>
+
+
+<div
+id="fractionAnswer"
+class="answer">
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     PERCENTAGE
+========================= -->
+
+<div
+id="percentage"
+class="tool"
+style="display:none">
+
+<div class="card">
+
+<h2>
+📊 Percentage
+</h2>
+
+<p class="card-description">
+Calculate percentage step-by-step.
+</p>
+
+
+<div class="grid2">
+
+<div class="field">
+
+<label>
+Number
+</label>
+
+<input
+id="percentNumber"
+type="number"
+placeholder="500">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Percentage
+</label>
+
+<input
+id="percentValue"
+type="number"
+placeholder="20">
+
+</div>
+
+</div>
+
+
+<button
+class="action"
+onclick="percentageCalc()">
+
+Calculate
+
+</button>
+
+
+<div
+id="percentageAnswer"
+class="answer">
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     AVERAGE
+========================= -->
+
+<div
+id="average"
+class="tool"
+style="display:none">
+
+<div class="card">
+
+<h2>
+📚 Average
+</h2>
+
+<p class="card-description">
+Enter numbers separated by commas.
+</p>
+
+
+<div class="field">
+
+<label>
+Numbers
+</label>
+
+<input
+id="averageInput"
+placeholder="10,20,30,40">
+
+</div>
+
+
+<button
+class="action"
+onclick="averageCalc()">
+
+Calculate Average
+
+</button>
+
+
+<div
+id="averageAnswer"
+class="answer">
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     RATIO
+========================= -->
+
+<div
+id="ratio"
+class="tool"
+style="display:none">
+
+<div class="card">
+
+<h2>
+⚖️ Ratio
+</h2>
+
+<p class="card-description">
+Simplify a ratio.
+</p>
+
+
+<div class="grid2">
+
+<div class="field">
+
+<label>
+Number 1
+</label>
+
+<input
+id="ratioA"
+type="number"
+placeholder="12">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Number 2
+</label>
+
+<input
+id="ratioB"
+type="number"
+placeholder="18">
+
+</div>
+
+</div>
+
+
+<button
+class="action"
+onclick="ratioCalc()">
+
+Simplify Ratio
+
+</button>
+
+
+<div
+id="ratioAnswer"
+class="answer">
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     LINEAR
+========================= -->
+
+<div
+id="linear"
+class="tool"
+style="display:none">
+
+<div class="card">
+
+<h2>
+✏️ Linear Equation
+</h2>
+
+<p class="card-description">
+Solve equation: ax + b = c
+</p>
+
+
+<div class="grid2">
+
+<div class="field">
+
+<label>
+a
+</label>
+
+<input
+id="linearA"
+type="number"
+placeholder="2">
+
+</div>
+
+
+<div class="field">
+
+<label>
+b
+</label>
+
+<input
+id="linearB"
+type="number"
+placeholder="4">
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>
+c
+</label>
+
+<input
+id="linearC"
+type="number"
+placeholder="10">
+
+</div>
+
+
+<button
+class="action"
+onclick="linearCalc()">
+
+Solve Equation
+
+</button>
+
+
+<div
+id="linearAnswer"
+class="answer">
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     QUADRATIC
+========================= -->
+
+<div
+id="quadratic"
+class="tool"
+style="display:none">
+
+<div class="card">
+
+<h2>
+🔢 Quadratic Equation
+</h2>
+
+<p class="card-description">
+Solve: ax² + bx + c = 0
+</p>
+
+
+<div class="grid2">
+
+<div class="field">
+
+<label>
+a
+</label>
+
+<input
+id="quadA"
+type="number"
+placeholder="1">
+
+</div>
+
+
+<div class="field">
+
+<label>
+b
+</label>
+
+<input
+id="quadB"
+type="number"
+placeholder="-5">
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>
+c
+</label>
+
+<input
+id="quadC"
+type="number"
+placeholder="6">
+
+</div>
+
+
+<button
+class="action"
+onclick="quadraticCalc()">
+
+Solve Quadratic
+
+</button>
+
+
+<div
+id="quadraticAnswer"
+class="answer">
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     GCD LCM
+========================= -->
+
+<div
+id="gcd"
+class="tool"
+style="display:none">
+
+<div class="card">
+
+<h2>
+🔗 GCD & LCM
+</h2>
+
+<p class="card-description">
+Find greatest common divisor and least common multiple.
+</p>
+
+
+<div class="grid2">
+
+<div class="field">
+
+<label>
+Number 1
+</label>
+
+<input
+id="gcdA"
+type="number"
+placeholder="12">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Number 2
+</label>
+
+<input
+id="gcdB"
+type="number"
+placeholder="18">
+
+</div>
+
+</div>
+
+
+<button
+class="action"
+onclick="gcdLcmCalc()">
+
+Calculate
+
+</button>
+
+
+<div
+id="gcdAnswer"
+class="answer">
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     GEOMETRY
+========================= -->
+
+<div
+id="geometry"
+class="tool"
+style="display:none">
+
+<div class="card">
+
+<h2>
+📐 Geometry
+</h2>
+
+<p class="card-description">
+Calculate rectangle and circle measurements.
+</p>
+
+
+<div class="field">
+
+<label>
+Shape
+</label>
+
+<select id="shape">
+
+<option value="rectangle">
+Rectangle
+</option>
+
+<option value="circle">
+Circle
+</option>
+
+</select>
+
+</div>
+
+
+<div
+id="rectangleFields">
+
+<div class="grid2">
+
+<div class="field">
+
+<label>
+Length
+</label>
+
+<input
+id="geoLength"
+type="number"
+placeholder="10">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Width
+</label>
+
+<input
+id="geoWidth"
+type="number"
+placeholder="5">
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+id="circleFields"
+style="display:none">
+
+<div class="field">
+
+<label>
+Radius
+</label>
+
+<input
+id="geoRadius"
+type="number"
+placeholder="7">
+
+</div>
+
+</div>
+
+
+<button
+class="action"
+onclick="geometryCalc()">
+
+Calculate
+
+</button>
+
+
+<div
+id="geometryAnswer"
+class="answer">
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     PYTHAGORAS
+========================= -->
+
+<div
+id="pythagoras"
+class="tool"
+style="display:none">
+
+<div class="card">
+
+<h2>
+📏 Pythagorean Theorem
+</h2>
+
+<p class="card-description">
+Calculate the missing side of a right triangle.
+</p>
+
+
+<div class="field">
+
+<label>
+What do you want to find?
+</label>
+
+<select id="pythagorasType">
+
+<option value="c">
+Hypotenuse (c)
+</option>
+
+<option value="a">
+Side a
+</option>
+
+<option value="b">
+Side b
+</option>
+
+</select>
+
+</div>
+
+
+<div class="grid2">
+
+<div class="field">
+
+<label>
+Side a
+</label>
+
+<input
+id="pythA"
+type="number"
+placeholder="3">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Side b
+</label>
+
+<input
+id="pythB"
+type="number"
+placeholder="4">
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Hypotenuse c (if known)
+</label>
+
+<input
+id="pythC"
+type="number"
+placeholder="5">
+
+</div>
+
+
+<button
+class="action"
+onclick="pythagorasCalc()">
+
+Solve
+
+</button>
+
+
+<div
+id="pythagorasAnswer"
+class="answer">
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     TRIGONOMETRY
+========================= -->
+
+<div
+id="trigonometry"
+class="tool"
+style="display:none">
+
+<div class="card">
+
+<h2>
+📐 Trigonometry
+</h2>
+
+<p class="card-description">
+Calculate Sin, Cos and Tan.
+</p>
+
+
+<div class="field">
+
+<label>
+Function
+</label>
+
+<select id="trigFunction">
+
+<option value="sin">
+Sin
+</option>
+
+<option value="cos">
+Cos
+</option>
+
+<option value="tan">
+Tan
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Angle in Degrees
+</label>
+
+<input
+id="trigAngle"
+type="number"
+placeholder="30">
+
+</div>
+
+
+<button
+class="action"
+onclick="trigonometryCalc()">
+
+Calculate
+
+</button>
+
+
+<div
+id="trigAnswer"
+class="answer">
+
+</div>
+
+</div>
+
+</div>
+
+
+</main>
+
+
+
+<div class="footer">
+
+CalcPro • Student Mathematics
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================
+   RIPPLE
+========================= */
+
+document.addEventListener(
+"click",
+function(e){
+
+    const button =
+    e.target.closest("button");
+
+    if(!button)return;
+
+    const ripple =
+    document.createElement("span");
+
+    ripple.className="ripple";
+
+    const rect =
+    button.getBoundingClientRect();
+
+    const size =
+    Math.max(
+        rect.width,
+        rect.height
+    );
+
+    ripple.style.width =
+    size+"px";
+
+    ripple.style.height =
+    size+"px";
+
+    ripple.style.left =
+    (
+        e.clientX-
+        rect.left-
+        size/2
+    )+"px";
+
+    ripple.style.top =
+    (
+        e.clientY-
+        rect.top-
+        size/2
+    )+"px";
+
+    button.appendChild(
+        ripple
+    );
+
+    setTimeout(
+        ()=>ripple.remove(),
+        600
+    );
+
+});
+
+
+/* =========================
+   SHOW TOOL
+========================= */
+
+function showTool(
+    tool,
+    button
+){
+
+    document
+    .querySelectorAll(".tool")
+    .forEach(
+        x=>{
+            x.style.display="none";
+        }
+    );
+
+    document
+    .getElementById(tool)
+    .style.display="block";
+
+    document
+    .querySelectorAll(".category")
+    .forEach(
+        x=>{
+            x.classList.remove(
+                "active"
+            );
+        }
+    );
+
+    button.classList.add(
+        "active"
+    );
+
+}
+
+
+/* =========================
+   ANSWER
+========================= */
+
+function showAnswer(
+    id,
+    html
+){
+
+    const box =
+    document.getElementById(id);
+
+    box.innerHTML=html;
+
+    box.classList.add("show");
+
+}
+
+
+/* =========================
+   FORMAT
+========================= */
+
+function fmt(n){
+
+    if(!Number.isFinite(n))
+        return "Error";
+
+    return Number(
+        n.toFixed(10)
+    ).toLocaleString(
+        "en-US",
+        {
+            maximumFractionDigits:10
+        }
+    );
+
+}
+
+
+/* =========================
+   GCD
+========================= */
+
+function gcd(a,b){
+
+    a=Math.abs(a);
+
+    b=Math.abs(b);
+
+    while(b){
+
+        let temp=b;
+
+        b=a%b;
+
+        a=temp;
+
+    }
+
+    return a;
+
+}
+
+
+/* =========================
+   FRACTION
+========================= */
+
+function fractionCalc(){
+
+    const a=
+    Number(
+        document.getElementById(
+            "f1n"
+        ).value
+    );
+
+    const b=
+    Number(
+        document.getElementById(
+            "f1d"
+        ).value
+    );
+
+    const c=
+    Number(
+        document.getElementById(
+            "f2n"
+        ).value
+    );
+
+    const d=
+    Number(
+        document.getElementById(
+            "f2d"
+        ).value
+    );
+
+    const op=
+    document.getElementById(
+        "fractionOp"
+    ).value;
+
+
+    if(!b || !d){
+
+        showAnswer(
+            "fractionAnswer",
+            "Please enter valid denominators."
+        );
+
+        return;
+
+    }
+
+
+    let n;
+    let den;
+    let symbol;
+
+
+    if(op==="+"){
+
+        n=a*d+c*b;
+
+        den=b*d;
+
+        symbol="+";
+
+    }
+
+    else if(op==="-"){
+
+        n=a*d-c*b;
+
+        den=b*d;
+
+        symbol="−";
+
+    }
+
+    else if(op==="*"){
+
+        n=a*c;
+
+        den=b*d;
+
+        symbol="×";
+
+    }
+
+    else{
+
+        if(c===0){
+
+            showAnswer(
+                "fractionAnswer",
+                "Cannot divide by zero."
+            );
+
+            return;
+
+        }
+
+        n=a*d;
+
+        den=b*c;
+
+        symbol="÷";
+
+    }
+
+
+    const divisor=
+    gcd(n,den);
+
+    n/=divisor;
+
+    den/=divisor;
+
+
+    showAnswer(
+
+        "fractionAnswer",
+
+        `
+
+        <div class="answer-title">
+        Fraction Solution
+        </div>
+
+        <div class="step">
+        Step 1: Write the fractions
+        <br>
+        ${a}/${b} ${symbol} ${c}/${d}
+        </div>
+
+        <div class="step">
+        Step 2: Calculate numerator
+        <br>
+        ${n*divisor}
+        </div>
+
+        <div class="step">
+        Step 3: Calculate denominator
+        <br>
+        ${den*divisor}
+        </div>
+
+        <div class="step">
+        Step 4: Simplify using GCD
+        <br>
+        GCD = ${divisor}
+        </div>
+
+        <div class="final">
+        Answer = ${n}/${den}
+        <br>
+        Decimal = ${fmt(n/den)}
+        </div>
+
+        `
+
+    );
+
+}
+
+
+/* =========================
+   PERCENTAGE
+========================= */
+
+function percentageCalc(){
+
+    const number=
+    Number(
+        document.getElementById(
+            "percentNumber"
+        ).value
+    );
+
+    const percent=
+    Number(
+        document.getElementById(
+            "percentValue"
+        ).value
+    );
+
+    const answer=
+    number*percent/100;
+
+
+    showAnswer(
+
+        "percentageAnswer",
+
+        `
+
+        <div class="answer-title">
+        Percentage Solution
+        </div>
+
+        <div class="formula">
+        Percentage = Number × Rate ÷ 100
+        </div>
+
+        <div class="step">
+        Step 1:
+        ${number} × ${percent}
+        </div>
+
+        <div class="step">
+        Step 2:
+        ${number*percent} ÷ 100
+        </div>
+
+        <div class="final">
+        Answer = ${fmt(answer)}
+        </div>
+
+        `
+
+    );
+
+}
+
+
+/* =========================
+   AVERAGE
+========================= */
+
+function averageCalc(){
+
+    const raw=
+    document.getElementById(
+        "averageInput"
+    ).value;
+
+
+    const numbers=
+    raw.split(",")
+    .map(
+        x=>Number(
+            x.trim()
+        )
+    )
+    .filter(
+        x=>Number.isFinite(x)
+    );
+
+
+    if(
+        numbers.length===0
+    ){
+
+        showAnswer(
+            "averageAnswer",
+            "Enter valid numbers."
+        );
+
+        return;
+
+    }
+
+
+    const sum=
+    numbers.reduce(
+        (a,b)=>a+b,
+        0
+    );
+
+
+    const avg=
+    sum/numbers.length;
+
+
+    showAnswer(
+
+        "averageAnswer",
+
+        `
+
+        <div class="answer-title">
+        Average Solution
+        </div>
+
+        <div class="step">
+        Step 1: Add all numbers
+        <br>
+        ${numbers.join(" + ")}
+        =
+        ${fmt(sum)}
+        </div>
+
+        <div class="step">
+        Step 2: Count the numbers
+        <br>
+        Total = ${numbers.length}
+        </div>
+
+        <div class="step">
+        Step 3: Divide
+        <br>
+        ${fmt(sum)} ÷ ${numbers.length}
+        </div>
+
+        <div class="final">
+        Average = ${fmt(avg)}
+        </div>
+
+        `
+
+    );
+
+}
+
+
+/* =========================
+   RATIO
+========================= */
+
+function ratioCalc(){
+
+    const a=
+    Number(
+        document.getElementById(
+            "ratioA"
+        ).value
+    );
+
+    const b=
+    Number(
+        document.getElementById(
+            "ratioB"
+        ).value
+    );
+
+
+    if(!a || !b){
+
+        showAnswer(
+            "ratioAnswer",
+            "Enter valid numbers."
+        );
+
+        return;
+
+    }
+
+
+    const divisor=
+    gcd(a,b);
+
+
+    const x=a/divisor;
+
+    const y=b/divisor;
+
+
+    showAnswer(
+
+        "ratioAnswer",
+
+        `
+
+        <div class="answer-title">
+        Ratio Solution
+        </div>
+
+        <div class="step">
+        Step 1:
+        Original ratio = ${a}:${b}
+        </div>
+
+        <div class="step">
+        Step 2:
+        GCD = ${divisor}
+        </div>
+
+        <div class="step">
+        Step 3:
+        ${a} ÷ ${divisor}
+        =
+        ${x}
+        </div>
+
+        <div class="step">
+        Step 4:
+        ${b} ÷ ${divisor}
+        =
+        ${y}
+        </div>
+
+        <div class="final">
+        Simplified Ratio = ${x}:${y}
+        </div>
+
+        `
+
+    );
+
+}
+
+
+/* =========================
+   LINEAR
+========================= */
+
+function linearCalc(){
+
+    const a=
+    Number(
+        document.getElementById(
+            "linearA"
+        ).value
+    );
+
+    const b=
+    Number(
+        document.getElementById(
+            "linearB"
+        ).value
+    );
+
+    const c=
+    Number(
+        document.getElementById(
+            "linearC"
+        ).value
+    );
+
+
+    if(a===0){
+
+        showAnswer(
+            "linearAnswer",
+            "a cannot be zero."
+        );
+
+        return;
+
+    }
+
+
+    const x=
+    (c-b)/a;
+
+
+    showAnswer(
+
+        "linearAnswer",
+
+        `
+
+        <div class="answer-title">
+        Linear Equation Solution
+        </div>
+
+        <div class="step">
+        Step 1:
+        ${a}x + ${b} = ${c}
+        </div>
+
+        <div class="step">
+        Step 2:
+        ${a}x = ${c} − ${b}
+        </div>
+
+        <div class="step">
+        Step 3:
+        ${a}x = ${c-b}
+        </div>
+
+        <div class="step">
+        Step 4:
+        x = ${c-b} ÷ ${a}
+        </div>
+
+        <div class="final">
+        x = ${fmt(x)}
+        </div>
+
+        `
+
+    );
+
+}
+
+
+/* =========================
+   QUADRATIC
+========================= */
+
+function quadraticCalc(){
+
+    const a=
+    Number(
+        document.getElementById(
+            "quadA"
+        ).value
+    );
+
+    const b=
+    Number(
+        document.getElementById(
+            "quadB"
+        ).value
+    );
+
+    const c=
+    Number(
+        document.getElementById(
+            "quadC"
+        ).value
+    );
+
+
+    if(a===0){
+
+        showAnswer(
+            "quadraticAnswer",
+            "a cannot be zero."
+        );
+
+        return;
+
+    }
+
+
+    const D=
+    b*b-4*a*c;
+
+
+    if(D<0){
+
+        showAnswer(
+
+            "quadraticAnswer",
+
+            `
+
+            <div class="answer-title">
+            Quadratic Solution
+            </div>
+
+            <div class="step">
+            Discriminant:
+            <br>
+            D = b² − 4ac
+            </div>
+
+            <div class="step">
+            D = ${fmt(D)}
+            </div>
+
+            <div class="final">
+            No real roots.
+            </div>
+
+            `
+
+        );
+
+        return;
+
+    }
+
+
+    const root=
+    Math.sqrt(D);
+
+
+    const x1=
+    (-b+root)/(2*a);
+
+    const x2=
+    (-b-root)/(2*a);
+
+
+    showAnswer(
+
+        "quadraticAnswer",
+
+        `
+
+        <div class="answer-title">
+        Quadratic Solution
+        </div>
+
+        <div class="step">
+        Step 1:
+        D = b² − 4ac
+        </div>
+
+        <div class="step">
+        Step 2:
+        D = ${fmt(D)}
+        </div>
+
+        <div class="step">
+        Step 3:
+        √D = ${fmt(root)}
+        </div>
+
+        <div class="step">
+        Step 4:
+        x = (−b ± √D) ÷ 2a
+        </div>
+
+        <div class="final">
+        x₁ = ${fmt(x1)}
+        <br>
+        x₂ = ${fmt(x2)}
+        </div>
+
+        `
+
+    );
+
+}
+
+
+/* =========================
+   GCD LCM
+========================= */
+
+function gcdLcmCalc(){
+
+    const a=
+    Math.abs(
+        Number(
+            document.getElementById(
+                "gcdA"
+            ).value
+        )
+    );
+
+    const b=
+    Math.abs(
+        Number(
+            document.getElementById(
+                "gcdB"
+            ).value
+        )
+    );
+
+
+    if(!a || !b){
+
+        showAnswer(
+            "gcdAnswer",
+            "Enter valid numbers."
+        );
+
+        return;
+
+    }
+
+
+    const divisor=
+    gcd(a,b);
+
+
+    const lcm=
+    Math.abs(a*b)/divisor;
+
+
+    showAnswer(
+
+        "gcdAnswer",
+
+        `
+
+        <div class="answer-title">
+        GCD & LCM Solution
+        </div>
+
+        <div class="step">
+        GCD(${a},${b})
+        =
+        ${divisor}
+        </div>
+
+        <div class="step">
+        LCM Formula:
+        <br>
+        LCM = (${a} × ${b}) ÷ GCD
+        </div>
+
+        <div class="step">
+        LCM =
+        (${a} × ${b}) ÷ ${divisor}
+        </div>
+
+        <div class="final">
+        GCD = ${divisor}
+        <br>
+        LCM = ${fmt(lcm)}
+        </div>
+
+        `
+
+    );
+
+}
+
+
+/* =========================
+   GEOMETRY SELECT
+========================= */
+
+document
+.getElementById("shape")
+.addEventListener(
+"change",
+function(){
+
+    const rectangle=
+    document.getElementById(
+        "rectangleFields"
+    );
+
+    const circle=
+    document.getElementById(
+        "circleFields"
+    );
+
+
+    if(this.value==="circle"){
+
+        rectangle.style.display=
+        "none";
+
+        circle.style.display=
+        "block";
+
+    }
+    else{
+
+        rectangle.style.display=
+        "block";
+
+        circle.style.display=
+        "none";
+
+    }
+
+});
+
+
+/* =========================
+   GEOMETRY
+========================= */
+
+function geometryCalc(){
+
+    const shape=
+    document.getElementById(
+        "shape"
+    ).value;
+
+
+    if(shape==="rectangle"){
+
+        const length=
+        Number(
+            document.getElementById(
+                "geoLength"
+            ).value
+        );
+
+        const width=
+        Number(
+            document.getElementById(
+                "geoWidth"
+            ).value
+        );
+
+
+        const area=
+        length*width;
+
+        const perimeter=
+        2*(length+width);
+
+
+        showAnswer(
+
+            "geometryAnswer",
+
+            `
+
+            <div class="answer-title">
+            Rectangle Solution
+            </div>
+
+            <div class="step">
+            Area = Length × Width
+            </div>
+
+            <div class="step">
+            Area =
+            ${length} × ${width}
+            =
+            ${fmt(area)}
+            </div>
+
+            <div class="step">
+            Perimeter =
+            2 × (Length + Width)
+            </div>
+
+            <div class="step">
+            Perimeter =
+            2 × (${length} + ${width})
+            =
+            ${fmt(perimeter)}
+            </div>
+
+            <div class="final">
+            Area = ${fmt(area)}
+            <br>
+            Perimeter = ${fmt(perimeter)}
+            </div>
+
+            `
+
+        );
+
+    }
+
+
+    else{
+
+        const radius=
+        Number(
+            document.getElementById(
+                "geoRadius"
+            ).value
+        );
+
+
+        const area=
+        Math.PI*radius*radius;
+
+        const circumference=
+        2*Math.PI*radius;
+
+
+        showAnswer(
+
+            "geometryAnswer",
+
+            `
+
+            <div class="answer-title">
+            Circle Solution
+            </div>
+
+            <div class="step">
+            Area = πr²
+            </div>
+
+            <div class="step">
+            Area =
+            π × ${radius}²
+            </div>
+
+            <div class="step">
+            Area =
+            ${fmt(area)}
+            </div>
+
+            <div class="step">
+            Circumference = 2πr
+            </div>
+
+            <div class="final">
+            Area = ${fmt(area)}
+            <br>
+            Circumference =
+            ${fmt(circumference)}
+            </div>
+
+            `
+
+        );
+
+    }
+
+}
+
+
+/* =========================
+   PYTHAGORAS
+========================= */
+
+function pythagorasCalc(){
+
+    const type=
+    document.getElementById(
+        "pythagorasType"
+    ).value;
+
+
+    const a=
+    Number(
+        document.getElementById(
+            "pythA"
+        ).value
+    );
+
+    const b=
+    Number(
+        document.getElementById(
+            "pythB"
+        ).value
+    );
+
+    const c=
+    Number(
+        document.getElementById(
+            "pythC"
+        ).value
+    );
+
+
+    let answer;
+
+    let process;
+
+
+    if(type==="c"){
+
+        if(!a || !b){
+
+            showAnswer(
+                "pythagorasAnswer",
+                "Enter side a and side b."
+            );
+
+            return;
+
+        }
+
+
+        answer=
+        Math.sqrt(
+            a*a+b*b
+        );
+
+
+        process=
+        `
+        c² = a² + b²
+        <br>
+        c² = ${a}² + ${b}²
+        <br>
+        c² = ${a*a} + ${b*b}
+        <br>
+        c² = ${a*a+b*b}
+        <br>
+        c = √${a*a+b*b}
+        `;
+
+    }
+
+
+    else if(type==="a"){
+
+        if(!b || !c){
+
+            showAnswer(
+                "pythagorasAnswer",
+                "Enter side b and hypotenuse c."
+            );
+
+            return;
+
+        }
+
+
+        if(c<=b){
+
+            showAnswer(
+                "pythagorasAnswer",
+                "Hypotenuse must be greater than side b."
+            );
+
+            return;
+
+        }
+
+
+        answer=
+        Math.sqrt(
+            c*c-b*b
+        );
+
+
+        process=
+        `
+        a² = c² − b²
+        <br>
+        a² = ${c}² − ${b}²
+        <br>
+        a² = ${c*c} − ${b*b}
+        <br>
+        a² = ${c*c-b*b}
+        <br>
+        a = √${c*c-b*b}
+        `;
+
+    }
+
+
+    else{
+
+        if(!a || !c){
+
+            showAnswer(
+                "pythagorasAnswer",
+                "Enter side a and hypotenuse c."
+            );
+
+            return;
+
+        }
+
+
+        if(c<=a){
+
+            showAnswer(
+                "pythagorasAnswer",
+                "Hypotenuse must be greater than side a."
+            );
+
+            return;
+
+        }
+
+
+        answer=
+        Math.sqrt(
+            c*c-a*a
+        );
+
+
+        process=
+        `
+        b² = c² − a²
+        <br>
+        b² = ${c}² − ${a}²
+        <br>
+        b² = ${c*c} − ${a*a}
+        <br>
+        b² = ${c*c-a*a}
+        <br>
+        b = √${c*c-a*a}
+        `;
+
+    }
+
+
+    showAnswer(
+
+        "pythagorasAnswer",
+
+        `
+
+        <div class="answer-title">
+        Pythagorean Solution
+        </div>
+
+        <div class="formula">
+        a² + b² = c²
+        </div>
+
+        <div class="step">
+        ${process}
+        </div>
+
+        <div class="final">
+        Answer = ${fmt(answer)}
+        </div>
+
+        `
+
+    );
+
+}
+
+
+/* =========================
+   TRIGONOMETRY
+========================= */
+
+function trigonometryCalc(){
+
+    const func=
+    document.getElementById(
+        "trigFunction"
+    ).value;
+
+
+    const angle=
+    Number(
+        document.getElementById(
+            "trigAngle"
+        ).value
+    );
+
+
+    const radians=
+    angle*Math.PI/180;
+
+
+    let answer;
+
+    let formula;
+
+
+    if(func==="sin"){
+
+        answer=
+        Math.sin(radians);
+
+        formula=
+        "sin(θ)";
+
+    }
+
+    else if(func==="cos"){
+
+        answer=
+        Math.cos(radians);
+
+        formula=
+        "cos(θ)";
+
+    }
+
+    else{
+
+        answer=
+        Math.tan(radians);
+
+        formula=
+        "tan(θ)";
+
+    }
+
+
+    showAnswer(
+
+        "trigAnswer",
+
+        `
+
+        <div class="answer-title">
+        Trigonometry Solution
+        </div>
+
+        <div class="step">
+        Function:
+        ${formula}
+        </div>
+
+        <div class="step">
+        Angle:
+        ${angle}°
+        </div>
+
+        <div class="step">
+        Convert degrees to radians:
+        <br>
+        ${angle} × π ÷ 180
+        </div>
+
+        <div class="step">
+        Calculate:
+        ${func}(${angle}°)
+        </div>
+
+        <div class="final">
+        ${func}(${angle}°)
+        =
+        ${fmt(answer)}
+        </div>
+
+        `
+
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>

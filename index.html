@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#080d14">
+
+<meta name="description"
+      content="CalcPro - All-in-One Calculator">
+
+<link rel="manifest"
+      href="./manifest.json">
+
+<title>CalcPro - All-in-One Calculator</title>
+
+
+<style>
+
+/* =========================================
+   RESET
+========================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+
+body{
+    background:#05080d;
+    color:#ffffff;
+    font-family:
+        Arial,
+        "Noto Sans Bengali",
+        sans-serif;
+}
+
+
+/* =========================================
+   APP
+========================================= */
+
+.app{
+
+    width:100%;
+    min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(0,205,235,.10),
+            transparent 35%
+        ),
+        #080d14;
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header{
+
+    width:100%;
+    height:72px;
+
+    padding:0 16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:
+        rgba(8,13,20,.96);
+
+    border-bottom:
+        1px solid #202b3a;
+
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    backdrop-filter:blur(12px);
+
+}
+
+
+.logo{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+}
+
+
+.logo-icon{
+
+    width:44px;
+    height:44px;
+
+    border-radius:14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00c9e8,
+            #5865ff
+        );
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,190,230,.20);
+
+    font-size:23px;
+    font-weight:900;
+
+}
+
+
+.logo-name{
+
+    font-size:22px;
+    font-weight:900;
+
+}
+
+
+.logo-name span{
+
+    color:#00d5ed;
+
+}
+
+
+/* =========================================
+   HEADER BUTTON
+========================================= */
+
+.header-button{
+
+    width:44px;
+    height:44px;
+
+    border-radius:13px;
+
+    border:
+        1px solid #293748;
+
+    background:#111923;
+
+    color:#ffffff;
+
+    font-size:22px;
+
+    position:relative;
+    overflow:hidden;
+
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main{
+
+    width:100%;
+    max-width:760px;
+
+    margin:0 auto;
+
+    padding:
+        18px 12px 30px;
+
+    flex:1;
+
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero{
+
+    padding:
+        20px 5px 22px;
+
+}
+
+
+.hero-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:
+        7px 11px;
+
+    border-radius:20px;
+
+    background:#101d29;
+
+    border:
+        1px solid #20384a;
+
+    color:#00d5ed;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+}
+
+
+.hero h1{
+
+    margin-top:15px;
+
+    font-size:
+        clamp(30px,8vw,48px);
+
+    line-height:1.05;
+
+    font-weight:900;
+
+}
+
+
+.hero h1 span{
+
+    color:#00d5ed;
+
+}
+
+
+.hero p{
+
+    margin-top:10px;
+
+    max-width:580px;
+
+    color:#7c8a9d;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+}
+
+
+/* =========================================
+   QUICK CALCULATOR
+========================================= */
+
+.quick{
+
+    width:100%;
+
+    padding:18px;
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #101923,
+            #0b121b
+        );
+
+    border:
+        1px solid #223143;
+
+    box-shadow:
+        0 18px 50px
+        rgba(0,0,0,.22);
+
+}
+
+
+.quick-top{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+}
+
+
+.quick-title{
+
+    font-size:17px;
+    font-weight:800;
+
+}
+
+
+.quick-subtitle{
+
+    margin-top:4px;
+
+    color:#68778b;
+
+    font-size:11px;
+
+}
+
+
+.quick-icon{
+
+    width:43px;
+    height:43px;
+
+    border-radius:13px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#101f2c;
+
+    color:#00d5ed;
+
+    font-size:22px;
+
+}
+
+
+/* =========================================
+   QUICK DISPLAY
+========================================= */
+
+.quick-display{
+
+    margin-top:15px;
+
+    padding:
+        17px;
+
+    min-height:100px;
+
+    border-radius:17px;
+
+    background:#070c12;
+
+    border:
+        1px solid #1c2938;
+
+    text-align:right;
+
+}
+
+
+.quick-expression{
+
+    min-height:20px;
+
+    color:#59697c;
+
+    font-size:12px;
+
+}
+
+
+.quick-result{
+
+    margin-top:7px;
+
+    font-size:36px;
+
+    font-weight:800;
+
+    overflow-x:auto;
+
+}
+
+
+/* =========================================
+   QUICK BUTTON
+========================================= */
+
+.quick-button{
+
+    width:100%;
+
+    height:54px;
+
+    margin-top:11px;
+
+    border:0;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00b9db,
+            #5865ff
+        );
+
+    color:#ffffff;
+
+    font-size:15px;
+
+    font-weight:800;
+
+    position:relative;
+    overflow:hidden;
+
+}
+
+
+/* =========================================
+   SECTION
+========================================= */
+
+.section{
+
+    margin-top:24px;
+
+}
+
+
+.section-head{
+
+    display:flex;
+
+    align-items:end;
+
+    justify-content:space-between;
+
+    margin-bottom:12px;
+
+}
+
+
+.section-head h2{
+
+    font-size:20px;
+
+}
+
+
+.section-head p{
+
+    color:#637287;
+
+    font-size:10px;
+
+}
+
+
+/* =========================================
+   CALCULATOR GRID
+========================================= */
+
+.calculator-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:11px;
+
+}
+
+
+.calc-card{
+
+    min-height:170px;
+
+    padding:17px;
+
+    border-radius:21px;
+
+    background:#0d151f;
+
+    border:
+        1px solid #202d3d;
+
+    text-decoration:none;
+
+    color:#ffffff;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:
+        transform .15s,
+        border-color .15s;
+
+}
+
+
+.calc-card:active{
+
+    transform:scale(.97);
+
+}
+
+
+.calc-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    border-radius:50%;
+
+    right:-45px;
+    top:-45px;
+
+    background:
+        rgba(0,210,235,.06);
+
+}
+
+
+.card-icon{
+
+    width:50px;
+    height:50px;
+
+    border-radius:15px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#111f2c;
+
+    border:
+        1px solid #263b4d;
+
+    font-size:25px;
+
+}
+
+
+.calc-card h3{
+
+    margin-top:14px;
+
+    font-size:16px;
+
+}
+
+
+.calc-card p{
+
+    margin-top:6px;
+
+    color:#68778b;
+
+    font-size:11px;
+
+    line-height:1.6;
+
+}
+
+
+.card-arrow{
+
+    position:absolute;
+
+    right:15px;
+    bottom:15px;
+
+    color:#00d5ed;
+
+    font-size:19px;
+
+}
+
+
+/* =========================================
+   FEATURES
+========================================= */
+
+.features{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:9px;
+
+}
+
+
+.feature{
+
+    padding:14px;
+
+    border-radius:16px;
+
+    background:#0b121b;
+
+    border:
+        1px solid #1c2938;
+
+}
+
+
+.feature-icon{
+
+    font-size:20px;
+
+}
+
+
+.feature strong{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:12px;
+
+}
+
+
+.feature span{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:#617084;
+
+    font-size:10px;
+
+    line-height:1.5;
+
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer{
+
+    padding:
+        25px 10px;
+
+    text-align:center;
+
+    color:#4f5d70;
+
+    font-size:10px;
+
+}
+
+
+.footer strong{
+
+    color:#00d5ed;
+
+}
+
+
+/* =========================================
+   RIPPLE
+========================================= */
+
+.ripple{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    transform:scale(0);
+
+    background:
+        rgba(255,255,255,.25);
+
+    pointer-events:none;
+
+    animation:
+        ripple .55s linear;
+
+}
+
+
+@keyframes ripple{
+
+    to{
+
+        transform:scale(4);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:390px){
+
+    .main{
+
+        padding:
+            12px 9px 25px;
+
+    }
+
+
+    .hero h1{
+
+        font-size:31px;
+
+    }
+
+
+    .quick{
+
+        padding:13px;
+
+    }
+
+
+    .calc-card{
+
+        min-height:155px;
+
+        padding:14px;
+
+    }
+
+}
+
+
+@media(max-width:330px){
+
+    .calculator-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .features{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =====================================
+     HEADER
+===================================== -->
+
+<header class="header">
+
+
+    <div class="logo">
+
+
+        <div class="logo-icon">
+
+            ＋
+
+        </div>
+
+
+        <div class="logo-name">
+
+            Calc<span>Pro</span>
+
+        </div>
+
+
+    </div>
+
+
+    <button
+        class="header-button"
+        onclick="showAbout()">
+
+        ⋮
+
+    </button>
+
+
+</header>
+
+
+
+<!-- =====================================
+     MAIN
+===================================== -->
+
+<main class="main">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+
+    <div class="hero-badge">
+
+        ⚡ ALL-IN-ONE CALCULATOR
+
+    </div>
+
+
+    <h1>
+
+        হিসাব করুন
+        <span>সহজে।</span>
+
+    </h1>
+
+
+    <p>
+
+        Student, Business, Scientific এবং
+        সাধারণ হিসাব—সবকিছু এক জায়গায়।
+        দ্রুত, সুন্দর এবং offline-এও ব্যবহারযোগ্য।
+
+    </p>
+
+
+</section>
+
+
+
+<!-- =====================================
+     QUICK
+===================================== -->
+
+<section class="quick">
+
+
+    <div class="quick-top">
+
+
+        <div>
+
+            <div class="quick-title">
+
+                🧮 Quick Calculator
+
+            </div>
+
+
+            <div class="quick-subtitle">
+
+                দ্রুত সাধারণ হিসাব করুন
+
+            </div>
+
+        </div>
+
+
+        <div class="quick-icon">
+
+            =
+
+        </div>
+
+
+    </div>
+
+
+    <div class="quick-display">
+
+
+        <div
+            id="quickExpression"
+            class="quick-expression">
+
+        </div>
+
+
+        <div
+            id="quickResult"
+            class="quick-result">
+
+            0
+
+        </div>
+
+
+    </div>
+
+
+    <button
+        class="quick-button"
+        onclick="openGeneral()">
+
+        Open General Calculator →
+
+    </button>
+
+
+</section>
+
+
+
+<!-- =====================================
+     CALCULATORS
+===================================== -->
+
+<section class="section">
+
+
+    <div class="section-head">
+
+
+        <div>
+
+            <h2>
+                Calculator Tools
+            </h2>
+
+        </div>
+
+
+        <p>
+            CHOOSE WHAT YOU NEED
+        </p>
+
+
+    </div>
+
+
+
+    <div class="calculator-grid">
+
+
+        <!-- GENERAL -->
+
+        <a
+            class="calc-card"
+            href="./general.html">
+
+
+            <div class="card-icon">
+
+                🧮
+
+            </div>
+
+
+            <h3>
+                General
+            </h3>
+
+
+            <p>
+
+                দৈনন্দিন যোগ,
+                বিয়োগ, গুণ,
+                ভাগ ও শতাংশের হিসাব।
+
+            </p>
+
+
+            <div class="card-arrow">
+
+                →
+
+            </div>
+
+
+        </a>
+
+
+
+        <!-- STUDENT -->
+
+        <a
+            class="calc-card"
+            href="./student.html">
+
+
+            <div class="card-icon">
+
+                🎓
+
+            </div>
+
+
+            <h3>
+                Student
+            </h3>
+
+
+            <p>
+
+                ছাত্রদের গণিত,
+                সূত্র ও বিভিন্ন
+                অংক সমাধানের জন্য।
+
+            </p>
+
+
+            <div class="card-arrow">
+
+                →
+
+            </div>
+
+
+        </a>
+
+
+
+        <!-- BUSINESS -->
+
+        <a
+            class="calc-card"
+            href="./business.html">
+
+
+            <div class="card-icon">
+
+                💼
+
+            </div>
+
+
+            <h3>
+                Business
+            </h3>
+
+
+            <p>
+
+                লাভ-ক্ষতি,
+                Discount, VAT,
+                Profit Margin এবং হিসাব।
+
+            </p>
+
+
+            <div class="card-arrow">
+
+                →
+
+            </div>
+
+
+        </a>
+
+
+
+        <!-- SCIENTIFIC -->
+
+        <a
+            class="calc-card"
+            href="./scientific.html">
+
+
+            <div class="card-icon">
+
+                🔬
+
+            </div>
+
+
+            <h3>
+                Scientific
+            </h3>
+
+
+            <p>
+
+                Advanced mathematics,
+                trigonometry এবং
+                scientific calculation।
+
+            </p>
+
+
+            <div class="card-arrow">
+
+                →
+
+            </div>
+
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     FEATURES
+===================================== -->
+
+<section class="section">
+
+
+    <div class="section-head">
+
+        <h2>
+            Features
+        </h2>
+
+    </div>
+
+
+    <div class="features">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                📱
+            </div>
+
+            <strong>
+                Mobile Friendly
+            </strong>
+
+            <span>
+                ফোনের স্ক্রিনের জন্য
+                responsive design।
+            </span>
+
+        </div>
+
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ⚡
+            </div>
+
+            <strong>
+                Fast
+            </strong>
+
+            <span>
+                দ্রুত calculation এবং
+                smooth interface।
+            </span>
+
+        </div>
+
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                📴
+            </div>
+
+            <strong>
+                Offline Ready
+            </strong>
+
+            <span>
+                Cache হওয়ার পর
+                internet ছাড়াও ব্যবহার করা যাবে।
+            </span>
+
+        </div>
+
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🕘
+            </div>
+
+            <strong>
+                Calculation History
+            </strong>
+
+            <span>
+                প্রয়োজনীয় হিসাব
+                history-তে রাখা যাবে।
+            </span>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer class="footer">
+
+    <strong>CalcPro</strong>
+
+    <br><br>
+
+    All-in-One Calculator
+
+    <br>
+
+    © 2026 CalcPro
+
+</footer>
+
+
+</div>
+
+
+
+<!-- =====================================
+     JAVASCRIPT
+===================================== -->
+
+<script>
+
+
+/* =====================================
+   OPEN GENERAL
+===================================== */
+
+function openGeneral(){
+
+    window.location.href =
+        "./general.html";
+
+}
+
+
+/* =====================================
+   ABOUT
+===================================== */
+
+function showAbout(){
+
+    alert(
+        "CalcPro\n\n" +
+        "All-in-One Calculator\n\n" +
+        "General • Student • Business • Scientific\n\n" +
+        "Offline Ready"
+    );
+
+}
+
+
+/* =====================================
+   RIPPLE ANIMATION
+===================================== */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const button =
+            event.target.closest(
+                "button"
+            );
+
+
+        if(!button){
+
+            return;
+
+        }
+
+
+        const ripple =
+            document.createElement(
+                "span"
+            );
+
+
+        ripple.className =
+            "ripple";
+
+
+        const rect =
+            button.getBoundingClientRect();
+
+
+        const size =
+            Math.max(
+                rect.width,
+                rect.height
+            );
+
+
+        ripple.style.width =
+            size + "px";
+
+
+        ripple.style.height =
+            size + "px";
+
+
+        ripple.style.left =
+            (
+                event.clientX -
+                rect.left -
+                size / 2
+            ) + "px";
+
+
+        ripple.style.top =
+            (
+                event.clientY -
+                rect.top -
+                size / 2
+            ) + "px";
+
+
+        button.appendChild(
+            ripple
+        );
+
+
+        setTimeout(
+            function(){
+
+                ripple.remove();
+
+            },
+            600
+        );
+
+    }
+);
+
+
+/* =====================================
+   SERVICE WORKER
+===================================== */
+
+if(
+    "serviceWorker" in navigator
+){
+
+    window.addEventListener(
+        "load",
+        function(){
+
+            navigator.serviceWorker
+                .register(
+                    "./service-worker.js"
+                )
+
+                .then(
+                    function(){
+
+                        console.log(
+                            "CalcPro Offline Mode Ready"
+                        );
+
+                    }
+                )
+
+                .catch(
+                    function(error){
+
+                        console.error(
+                            "Service Worker Error:",
+                            error
+                        );
+
+                    }
+                );
+
+        }
+    );
+
+}
+
+
+/* =====================================
+   ONLINE / OFFLINE STATUS
+===================================== */
+
+window.addEventListener(
+    "offline",
+    function(){
+
+        console.log(
+            "CalcPro is now offline"
+        );
+
+    }
+);
+
+
+window.addEventListener(
+    "online",
+    function(){
+
+        console.log(
+            "CalcPro is online"
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
